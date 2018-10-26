@@ -1,3 +1,5 @@
+package src;
+
 /**
  * @author Martin Piatka
  */

@@ -1,30 +1,34 @@
+package Interfaces;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interfaces;
 
+import src.Customer;
+import java.util.List;
 /**
  *
- * @author Anry
+ * @author Andrej Sokolík
  */
 public interface CustomerDAO {
-    
     /*
-        Return ID of specifik Customer
+        Return list of all known customers
     */
-    int getID();
-    
+    List<Customer> getAllCustomers();
     /*
-        Return full name of Customer
+        return specific custemer by selected ID
     */
-    String getName();
-    
+    Customer findByID(int id);
     /*
-        Return String wich contains all borrowed books
+        return true if Customer was succesfully added otherwise false
     */
-    String borrowedBooks();
+    boolean insertCustomer(Customer customer);
+    /*
+        return true if selected customer was succesfully removed otherwise false
+    */
+    boolean deleteCustomer(Customer customer);
     
     
     
