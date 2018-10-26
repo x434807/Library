@@ -26,7 +26,7 @@ public class Loan {
 
         BookCondition borrowCondition = BookCondition.UNKNOWN; // Will be taken from book
         BookCondition returnCondition = BookCondition.UNKNOWN; // Not yet returned
-
+        
         LoanItem item = new LoanItem(book, borrowCondition, returnCondition);
         items.add(item);
 

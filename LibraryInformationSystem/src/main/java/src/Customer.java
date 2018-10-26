@@ -13,16 +13,16 @@ import jdk.nashorn.internal.objects.NativeArray;
 
 /**
  *
- * @author Anry
+ * @author Andrej Sokolík
  */
 public class Customer {
-    int id;
+    int cust_id;
     String name, surname;
     String password;
     List<Book> books;
 
     public Customer(int id, String name, String surname, String password) {
-        this.id = id;
+        this.cust_id = id;
         this.name = name;
         this.surname = surname;
         this.password = password;
@@ -47,7 +47,7 @@ public class Customer {
     */
     public String getComplexCustomerInfo(){
         String result = "";
-        result += String.valueOf(id)+";";
+        result += String.valueOf(cust_id)+";";
         
         if(name.isEmpty()){
             result += "-;";

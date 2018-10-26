@@ -8,8 +8,27 @@ package src;
 
 /**
  *
- * @author Anry
+ * @author Andrej Sokolík
  */
 class Book {
+    String ISBN;
+    BookCondition condition;
+    boolean status; // true if book is borrowed
+
+    public Book(String ISBN, BookCondition condition) {
+        this.ISBN = ISBN;
+        this.condition = condition;
+        status = false; // now registred book cannot be borrowed
+    }
+
+    public void setCondition(BookCondition condition) {
+        this.condition = condition;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    
+    
     
 }
