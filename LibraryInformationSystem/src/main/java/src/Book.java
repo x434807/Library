@@ -25,6 +25,10 @@ class Book {
         this.condition = condition;
     }
 
+    public BookCondition getCondition() {
+        return condition;
+    }
+
     public void setStatus(boolean status) {
         this.status = status;
     }
