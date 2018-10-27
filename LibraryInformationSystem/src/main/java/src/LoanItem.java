@@ -5,9 +5,9 @@ package src;
  */
 
 public class LoanItem {
-    Book book;
-    BookCondition borrowCondition;
-    BookCondition returnCondition;
+    private Book book;
+    private BookCondition borrowCondition;
+    private BookCondition returnCondition;
 
     LoanItem(Book book, BookCondition borrowCondition, BookCondition returnCondition){
         this.book = book;
