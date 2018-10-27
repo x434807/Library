@@ -4,7 +4,20 @@ package src;
  * @author Martin Piatka
  */
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class LoanItem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "LOAN_ID")
+    private Loan loan;
+
     private Book book;
     private BookCondition borrowCondition;
     private BookCondition returnCondition;

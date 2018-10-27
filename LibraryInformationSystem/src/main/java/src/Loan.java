@@ -1,5 +1,6 @@
 package src;
 
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +10,19 @@ import java.util.List;
  * @author Martin Piatka
  */
 
+@Entity
+@Table
 public class Loan {
-    private int id;
+
+    @Id
+    @Column(name = "LOAN_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private Customer customer;
     private ZonedDateTime timestamp;
+
+    @OneToMany(mappedBy = "loan")
     private List<LoanItem> items;
 
     public Loan(int id, Customer customer) {
@@ -55,7 +65,7 @@ public class Loan {
         this.timestamp = timestamp;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
