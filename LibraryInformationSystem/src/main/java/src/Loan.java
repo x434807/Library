@@ -14,6 +14,10 @@ public class Loan {
     ZonedDateTime timestamp;
     List<LoanItem> items;
 
+    public Loan(int id, Customer customer) {
+        this(id, customer, ZonedDateTime.now());
+    }
+
     public Loan(int id, Customer customer, ZonedDateTime timestamp) {
         this.id = id;
         this.customer = customer;
