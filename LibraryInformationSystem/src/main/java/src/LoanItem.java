@@ -11,9 +11,9 @@ import javax.persistence.*;
 public class LoanItem {
 
     @Id
-    @Column(name="LoanItemID")
+    @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "LoanID")

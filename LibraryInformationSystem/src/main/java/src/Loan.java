@@ -15,9 +15,9 @@ import java.util.List;
 public class Loan {
 
     @Id
-    @Column(name = "LoanID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "CustomerID")
@@ -77,7 +77,7 @@ public class Loan {
         return id;
     }
 
-    private void setId(int id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
