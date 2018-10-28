@@ -13,7 +13,7 @@ public interface DAO<T> {
      *
      * @param entity entity to be persisted
      */
-    public void create(T t);
+    public void create(T entity);
 
     /**
      * Updates an entity in the database.
