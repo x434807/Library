@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class LoanItem {
 
     @Id
-    @Column(name="ID")
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -29,13 +29,13 @@ public class LoanItem {
     @Column(name = "ReturnCondition")
     private BookCondition returnCondition;
 
-    public LoanItem(Book book, BookCondition borrowCondition, BookCondition returnCondition){
+    public LoanItem(Book book, BookCondition borrowCondition, BookCondition returnCondition) {
         this.book = book;
         this.borrowCondition = borrowCondition;
         this.returnCondition = returnCondition;
     }
 
-    protected LoanItem(){
+    protected LoanItem() {
 
     }
 

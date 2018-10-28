@@ -14,7 +14,6 @@ import javax.persistence.EntityManager;
  * @author Andrej Sokolík
  */
 public class CustomerDAOImpl implements CustomerDAO {
-
     private EntityManager entityManager;
 
     @Override
