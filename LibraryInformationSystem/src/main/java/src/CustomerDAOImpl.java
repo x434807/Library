@@ -34,25 +34,12 @@ public class CustomerDAOImpl implements DAO<Customer>{
 
     @Override
     public void save(Customer t) {
-        executeInsideTransaction(entityManager -> entityManager.persist(t));
+        JpaHelper.executeInsideTransaction(entityManager, em -> em.persist(t));
     }
 
     @Override
     public void delete(Customer t) {
-        executeInsideTransaction(entityManager -> entityManager.remove(t));
+        JpaHelper.executeInsideTransaction(entityManager, em -> em.remove(t));
     }
 
-    private void executeInsideTransaction(Consumer<EntityManager> action) {
-        EntityTransaction tx = entityManager.getTransaction();
-        try {
-            tx.begin();
-            action.accept(entityManager);
-            tx.commit(); 
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            throw e;
-        }
-    }
-    
 }

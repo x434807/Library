@@ -29,15 +29,18 @@ public class Loan {
     @OneToMany(mappedBy = "loan")
     private List<LoanItem> items;
 
-    public Loan(int id, Customer customer) {
-        this(id, customer, ZonedDateTime.now());
+    public Loan(Customer customer) {
+        this(customer, ZonedDateTime.now());
     }
 
-    public Loan(int id, Customer customer, ZonedDateTime timestamp) {
-        this.id = id;
+    public Loan(Customer customer, ZonedDateTime timestamp) {
         this.customer = customer;
         this.timestamp = timestamp;
         items = new ArrayList<LoanItem>();
+    }
+
+    protected Loan(){
+        items = new ArrayList<>();
     }
 
     public boolean addLoanedBook(Book book){
@@ -73,7 +76,7 @@ public class Loan {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
