@@ -5,9 +5,8 @@
  */
 package src;
 
-import Interfaces.DAO;
+import Interfaces.CustomerDAO;
 import java.util.List;
-import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -15,29 +14,49 @@ import javax.persistence.Query;
  *
  * @author Andrej Sokolík
  */ 
-public class CustomerDAOImpl implements DAO<Customer>{
+public class CustomerDAOImpl implements CustomerDAO{
     
     private EntityManager entityManager;
     
+    
     @Override
-    public Optional<Customer> get(long id) {
-        return Optional.ofNullable(entityManager.find(Customer.class,id));
+    public void create(Customer t) {
+        entityManager.persist(t);
     }
 
     @Override
-    public List<Customer> getAll() {
-        Query q = entityManager.createQuery("SELECT e FROM Customer e");
-        return q.getResultList();
+    public void update(Customer entity) {
+        entityManager.merge(entity);
     }
 
     @Override
-    public void save(Customer t) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.persist(t));
+    public void remove(Customer entity) {
+        entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
     }
 
     @Override
-    public void delete(Customer t) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.remove(t));
+    public Customer findById(Long id) {
+         return entityManager.find(Customer.class, id);
     }
+
+    @Override
+    public List<Customer> findAll() {
+        Query query = entityManager.createQuery("SELECT c FROM Customer c", Customer.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public Customer findByLogin(String login) {
+        if (login == null || login.isEmpty()) {
+            throw new IllegalArgumentException("The login is null!");
+        }
+        try {
+            return entityManager.createQuery("SELECT c FROM Customer c WHERE c.login = :login",
+                        Customer.class).setParameter("login", login).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
 
 }

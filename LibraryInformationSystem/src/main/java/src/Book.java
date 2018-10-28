@@ -3,59 +3,37 @@ package src;
 import java.util.Objects;
 import javax.persistence.*;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author Andrej Sokolík
+ * @author Matúš Čongrády, Andrej Sokolík
  */
 
 @Entity
 @Table
-class Book {
+public class Book {
     @Id
-    @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ID;
-    
-    @Column(name="ISBN", unique = true, nullable = false)
+    private long id;
+
+    @Column(nullable = false, unique = true)
     private String ISBN;
+
+    @Column(nullable = false)
+    private String author;
     
-    @Column(name="name", nullable = false)
-    private String name;
-    
-    @Column (name = "Authors")
-    private String authors;
-    
-    @Column(name = "Condition", nullable = false)
+    @Column(nullable = false)
     private BookCondition condition;
     
-    @Column(name = "Status", nullable = false)
-    private boolean isAvailable;
+    @Column
+    private boolean isAvailable = true;
 
-    public Book(String ISBN, String name, String authors, BookCondition condition) {
-        this.ISBN = ISBN;
-        this.authors = authors;
-        this.condition = condition;
-        isAvailable = true; // now registred book should be available
-    }
+    // Default Constructor
+    public Book() {}
 
-    public Book() {
-    }
 
-    
-    //Getters and Setters
-    
-    public long getID() {
-        return ID;
-    }
-
-    public void setID(long bookID) {
-        this.ID = bookID;
+    // Getters and setters
+    public long getId() {
+        return id;
     }
 
     public String getISBN() {
@@ -66,43 +44,34 @@ class Book {
         this.ISBN = ISBN;
     }
 
-    public String getName() {
-        return name;
+    public String getAuthor() {
+        return this.author;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getAuthors() {
-        return authors;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public void setAuthors(String authors) {
-        this.authors = authors;
+    public BookCondition getCondition() {
+        return this.condition;
     }
 
     public void setCondition(BookCondition condition) {
         this.condition = condition;
     }
 
-    public BookCondition getCondition() {
-        return condition;
+    public boolean isAvailable() {
+        return this.isAvailable;
     }
 
-    public void setIsAvailable(boolean status) {
-        this.isAvailable = status;
+    public void setAvailable(boolean available) {
+        this.isAvailable = available;
     }
 
-    public boolean isIsAvailable() {
-        return isAvailable;
-    }
-
-    
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.ISBN);
+        hash = 43 * hash + Objects.hashCode(this.ISBN);
         return hash;
     }
 
@@ -123,12 +92,6 @@ class Book {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Book{" + "ID=" + ID + ", ISBN=" + ISBN + ", name=" + name + ", authors=" + authors + ", condition=" + condition + ", status=" + isAvailable + '}';
-    }
-    
     
     
 }
