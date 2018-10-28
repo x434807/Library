@@ -7,7 +7,7 @@ package src;
 
 /**
  *
- * @author Anry
+ * @author Andrej Sokolík
  */
 public enum BookStatus {
     FREE,

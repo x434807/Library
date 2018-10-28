@@ -30,6 +30,7 @@ public class Customer {
     @Column(name = "password")
     String password;
 
+    @OneToMany(mappedBy = "book")
     List<Book> books;
 
     public Customer(int id, String name, String surname, String password) {

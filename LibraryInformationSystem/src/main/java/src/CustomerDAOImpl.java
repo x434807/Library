@@ -5,33 +5,54 @@
  */
 package src;
 
-import Interfaces.CustomerDAO;
+import Interfaces.DAO;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 /**
  *
  * @author Andrej Sokolík
- */
-public class CustomerDAOImpl implements CustomerDAO{
-
+ */ 
+public class CustomerDAOImpl implements DAO<Customer>{
+    
+    private EntityManager entityManager;
+    
     @Override
-    public List<Customer> getAllCustomers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Optional<Customer> get(long id) {
+        return Optional.ofNullable(entityManager.find(Customer.class,id));
     }
 
     @Override
-    public Customer findByID(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Customer> getAll() {
+        Query q = entityManager.createQuery("SELECT e FROM Customer e");
+        return q.getResultList();
     }
 
     @Override
-    public boolean insertCustomer(Customer customer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void save(Customer t) {
+        executeInsideTransaction(entityManager -> entityManager.persist(t));
     }
 
     @Override
-    public boolean deleteCustomer(Customer customer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(Customer t) {
+        executeInsideTransaction(entityManager -> entityManager.remove(t));
+    }
+
+    private void executeInsideTransaction(Consumer<EntityManager> action) {
+        EntityTransaction tx = entityManager.getTransaction();
+        try {
+            tx.begin();
+            action.accept(entityManager);
+            tx.commit(); 
+        }
+        catch (RuntimeException e) {
+            tx.rollback();
+            throw e;
+        }
     }
     
 }
