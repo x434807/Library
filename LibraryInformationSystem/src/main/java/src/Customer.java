@@ -1,24 +1,35 @@
 package src;
 
-
 import java.util.LinkedList;
 import java.util.List;
-import jdk.nashorn.internal.objects.NativeArray;
+import javax.persistence.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Andrej Sokolík
  */
+@Entity
+@Table
 public class Customer {
+
+    @Id
+    @Column(name = "CustomerID")
     int cust_id;
-    String name, surname;
+
+    @Column(name = "Name")
+    String name;
+
+    @Column(name = "Surname")
+    String surname;
+
+    @Column(name = "password")
     String password;
+
     List<Book> books;
 
     public Customer(int id, String name, String surname, String password) {
@@ -40,39 +51,39 @@ public class Customer {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     /*
         @return String wich contains id;name;surname;book ids
         null values will be reprezented by '-'
-    */
-    public String getComplexCustomerInfo(){
+     */
+    public String getComplexCustomerInfo() {
         String result = "";
-        result += String.valueOf(cust_id)+";";
-        
-        if(name.isEmpty()){
+        result += String.valueOf(cust_id) + ";";
+
+        if (name.isEmpty()) {
             result += "-;";
-        }else{
-            result += (name+";");
+        } else {
+            result += (name + ";");
         }
-        
-        if(surname.isEmpty()){
+
+        if (surname.isEmpty()) {
             result += "-;";
-        }else{
-            result += (surname+";");
+        } else {
+            result += (surname + ";");
         }
-        
-        for(Book book : books){
+
+        for (Book book : books) {
             // book class has to be done first
         }
         return result;
     }
-    
+
     /*
         @param newBorrowedBook is new Book wich should be added to list od borrowed book
         @return if succesfully added return true otherwise return false
-    */
-    public boolean addBorrowedBook(Book newBorrowedBook){
-        if(newBorrowedBook == null){
+     */
+    public boolean addBorrowedBook(Book newBorrowedBook) {
+        if (newBorrowedBook == null) {
             return false;
         }
         books.add(newBorrowedBook);
