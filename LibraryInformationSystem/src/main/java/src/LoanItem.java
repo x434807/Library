@@ -29,10 +29,14 @@ public class LoanItem {
     @Column(name = "ReturnCondition")
     private BookCondition returnCondition;
 
-    LoanItem(Book book, BookCondition borrowCondition, BookCondition returnCondition){
+    public LoanItem(Book book, BookCondition borrowCondition, BookCondition returnCondition){
         this.book = book;
         this.borrowCondition = borrowCondition;
         this.returnCondition = returnCondition;
+    }
+
+    protected LoanItem(){
+
     }
 
     public Book getBook() {
@@ -57,5 +61,21 @@ public class LoanItem {
 
     public void setReturnCondition(BookCondition returnCondition) {
         this.returnCondition = returnCondition;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    private void setId(long id) {
+        this.id = id;
+    }
+
+    public Loan getLoan() {
+        return loan;
+    }
+
+    private void setLoan(Loan loan) {
+        this.loan = loan;
     }
 }
