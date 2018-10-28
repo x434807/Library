@@ -1,6 +1,7 @@
 package src;
 
 import java.util.List;
+import Interfaces.BookDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -14,13 +15,13 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public void update(Book entity) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.merge(entity));
+    public void update(Book book) {
+        JpaHelper.executeInsideTransaction(entityManager, em -> em.merge(book));
     }
 
     @Override
-    public void remove(Book entity) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.remove(entity));
+    public void remove(Book book) {
+        JpaHelper.executeInsideTransaction(entityManager, em -> em.remove(book));
     }
 
     @Override

@@ -39,20 +39,20 @@ public class Loan {
         items = new ArrayList<LoanItem>();
     }
 
-    protected Loan(){
+    protected Loan() {
         items = new ArrayList<>();
     }
 
-    public boolean addLoanedBook(Book book){
-        if(book == null)
+    public boolean addLoanedBook(Book book) {
+        if (book == null)
             return false;
 
         BookCondition borrowCondition = book.getCondition();
         BookCondition returnCondition = BookCondition.UNKNOWN; // Not yet returned
-        
+
         LoanItem item = new LoanItem(book, borrowCondition, returnCondition);
         items.add(item);
-        
+
         customer.addBorrowedBook(book);
         return true;
     }
@@ -77,7 +77,7 @@ public class Loan {
         return id;
     }
 
-    private void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

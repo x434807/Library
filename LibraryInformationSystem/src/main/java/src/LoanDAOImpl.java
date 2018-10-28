@@ -3,7 +3,6 @@ package src;
 import Interfaces.DAO;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.List;
 
 public class LoanDAOImpl implements DAO<Loan> {
@@ -19,11 +18,9 @@ public class LoanDAOImpl implements DAO<Loan> {
         return entityManager.find(Loan.class, id);
     }
 
-
     @Override
     public List<Loan> findAll() {
-        Query q = entityManager.createQuery("SELECT e FROM Loan e");
-        return q.getResultList();
+        return entityManager.createQuery("SELECT e FROM Loan e", Loan.class).getResultList();
     }
 
     @Override
@@ -42,6 +39,4 @@ public class LoanDAOImpl implements DAO<Loan> {
     public void update(Loan loan) {
         JpaHelper.executeInsideTransaction(entityManager, em -> em.merge(loan));
     }
-
 }
-

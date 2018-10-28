@@ -8,17 +8,15 @@ package src;
 import Interfaces.CustomerDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 /**
  *
  * @author Andrej Sokolík
- */ 
-public class CustomerDAOImpl implements CustomerDAO{
-    
+ */
+public class CustomerDAOImpl implements CustomerDAO {
+
     private EntityManager entityManager;
-    
-    
+
     @Override
     public void create(Customer t) {
         entityManager.persist(t);
@@ -36,13 +34,12 @@ public class CustomerDAOImpl implements CustomerDAO{
 
     @Override
     public Customer findById(Long id) {
-         return entityManager.find(Customer.class, id);
+        return entityManager.find(Customer.class, id);
     }
 
     @Override
     public List<Customer> findAll() {
-        Query query = entityManager.createQuery("SELECT c FROM Customer c", Customer.class);
-        return query.getResultList();
+        return entityManager.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
     }
 
     @Override
@@ -51,12 +48,10 @@ public class CustomerDAOImpl implements CustomerDAO{
             throw new IllegalArgumentException("The login is null!");
         }
         try {
-            return entityManager.createQuery("SELECT c FROM Customer c WHERE c.login = :login",
-                        Customer.class).setParameter("login", login).getSingleResult();
+            return entityManager.createQuery("SELECT c FROM Customer c WHERE c.login = :login", Customer.class)
+                    .setParameter("login", login).getSingleResult();
         } catch (Exception e) {
             return null;
         }
     }
-    
-
 }
