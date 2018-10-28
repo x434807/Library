@@ -4,9 +4,29 @@ package src;
  * @author Martin Piatka
  */
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class LoanItem {
+
+    @Id
+    @Column(name="LoanItemID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "LoanID")
+    private Loan loan;
+
+    @ManyToOne
+    @JoinColumn(name = "BookID")
     private Book book;
+
+    @Column(name = "BorrowCondition")
     private BookCondition borrowCondition;
+
+    @Column(name = "ReturnCondition")
     private BookCondition returnCondition;
 
     LoanItem(Book book, BookCondition borrowCondition, BookCondition returnCondition){
