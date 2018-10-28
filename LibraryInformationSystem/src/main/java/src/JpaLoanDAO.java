@@ -3,11 +3,9 @@ package src;
 import Interfaces.DAO;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public class JpaLoanDAO implements DAO<Loan> {
 

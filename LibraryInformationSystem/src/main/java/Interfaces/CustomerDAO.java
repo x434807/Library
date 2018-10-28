@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Andrej Sokolík
  */
-public interface CustomerDAO {
+public interface CustomerDAO extends DAO<Customer>{
     /*
         Return list of all known customers
     */

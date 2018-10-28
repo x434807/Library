@@ -52,7 +52,8 @@ public class Loan {
         
         LoanItem item = new LoanItem(book, borrowCondition, returnCondition);
         items.add(item);
-
+        
+        customer.addBorrowedBook(book);
         return true;
     }
 
