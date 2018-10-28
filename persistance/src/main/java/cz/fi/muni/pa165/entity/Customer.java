@@ -1,14 +1,9 @@
-package src;
+package java.cz.fi.muni.pa165.entity;
 
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author Andrej Sokolík
@@ -18,8 +13,8 @@ import javax.persistence.*;
 public class Customer {
 
     @Id
-    @Column(name = "CustomerID")
-    int cust_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "Name")
     String name;
@@ -33,8 +28,8 @@ public class Customer {
     @OneToMany(mappedBy = "book")
     List<Book> books;
 
-    public Customer(int id, String name, String surname, String password) {
-        this.cust_id = id;
+    public Customer(Long id, String name, String surname, String password) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.password = password;
@@ -54,8 +49,8 @@ public class Customer {
     }
 
     /*
-        @return String wich contains id;name;surname;book ids
-        null values will be reprezented by '-'
+        @return String which contains id;name;surname;book ids
+        null values will be represented by '-'
      */
     public String getComplexCustomerInfo() {
         String result = "";

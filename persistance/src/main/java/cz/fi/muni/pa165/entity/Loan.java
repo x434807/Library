@@ -1,4 +1,4 @@
-package src;
+package java.cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;

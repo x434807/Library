@@ -1,4 +1,4 @@
-package src;
+package java.cz.fi.muni.pa165.dao;
 
 import Interfaces.DAO;
 

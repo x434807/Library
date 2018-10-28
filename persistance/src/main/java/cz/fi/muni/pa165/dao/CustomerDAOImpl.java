@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package src;
+package java.cz.fi.muni.pa165.dao;
 
-import Interfaces.DAO;
+import java.cz.fi.muni.pa165.entity.Customer;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -18,23 +14,22 @@ import javax.persistence.Query;
  * @author Andrej Sokolík
  */ 
 public class CustomerDAOImpl implements DAO<Customer>{
-    
     private EntityManager entityManager;
-    
+
     @Override
-    public Optional<Customer> get(long id) {
-        return Optional.ofNullable(entityManager.find(Customer.class,id));
+    public void create(Customer t) {
+        executeInsideTransaction(entityManager -> entityManager.persist(t));
     }
 
     @Override
-    public List<Customer> getAll() {
+    public Customer findById(long id) {
+        return entityManager.find(Customer.class, id);
+    }
+
+    @Override
+    public List<Customer> findAll() {
         Query q = entityManager.createQuery("SELECT e FROM Customer e");
         return q.getResultList();
-    }
-
-    @Override
-    public void save(Customer t) {
-        executeInsideTransaction(entityManager -> entityManager.persist(t));
     }
 
     @Override

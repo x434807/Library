@@ -1,0 +1,12 @@
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/dao/BookDAO.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/dao/LoanDAO.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/dao/CustomerDAOImpl.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/entity/LoanItem.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/entity/Loan.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/enums/BookCondition.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/dao/DAO.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/entity/Customer.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/dao/CustomerDAO.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/dao/JpaLoanDAO.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/entity/Book.java
+/Users/congy/Desktop/projects/Library/persistance/src/main/java/cz/fi/muni/pa165/dao/BookDAOImpl.java
