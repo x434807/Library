@@ -6,11 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
-public class JpaLoanDAO implements DAO<Loan> {
+public class LoanDAOImpl implements DAO<Loan> {
 
     private EntityManager entityManager;
 
-    public JpaLoanDAO(EntityManager entityManager) {
+    public LoanDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
@@ -38,6 +38,7 @@ public class JpaLoanDAO implements DAO<Loan> {
     }
 
     @Override
+
     public void update(Loan loan) {
         JpaHelper.executeInsideTransaction(entityManager, em -> em.merge(loan));
     }
