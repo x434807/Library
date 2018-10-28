@@ -2,28 +2,41 @@ package src;
 
 import Interfaces.DAO;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class JpaLoanDAO implements DAO<Loan> {
+
+    private EntityManager entityManager;
+
+    public JpaLoanDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     @Override
     public Optional<Loan> get(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Optional.ofNullable(entityManager.find(Loan.class,id));
     }
 
     @Override
     public List<Loan> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query q = entityManager.createQuery("SELECT e FROM Loan e");
+        return q.getResultList();
     }
 
     @Override
     public void save(Loan loan) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JpaHelper.executeInsideTransaction(entityManager, em -> em.persist(loan));
 
     }
 
     @Override
     public void delete(Loan loan) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JpaHelper.executeInsideTransaction(entityManager, em -> em.remove(loan));
     }
+
 }
