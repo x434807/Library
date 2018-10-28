@@ -11,15 +11,22 @@ import javax.persistence.*;
 public class LoanItem {
 
     @Id
+    @Column(name="LoanItemID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "LOAN_ID")
+    @JoinColumn(name = "LoanID")
     private Loan loan;
 
+    @ManyToOne
+    @JoinColumn(name = "BookID")
     private Book book;
+
+    @Column(name = "BorrowCondition")
     private BookCondition borrowCondition;
+
+    @Column(name = "ReturnCondition")
     private BookCondition returnCondition;
 
     LoanItem(Book book, BookCondition borrowCondition, BookCondition returnCondition){

@@ -15,11 +15,15 @@ import java.util.List;
 public class Loan {
 
     @Id
-    @Column(name = "LOAN_ID")
+    @Column(name = "LoanID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @ManyToOne
+    @JoinColumn(name = "CustomerID")
     private Customer customer;
+
+    @Column(name = "Timestamp")
     private ZonedDateTime timestamp;
 
     @OneToMany(mappedBy = "loan")
