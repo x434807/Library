@@ -7,15 +7,14 @@ package Interfaces;
  */
 
 import src.Customer;
-import java.util.List;
+
 /**
  *
  * @author Andrej Sokolík
  */
-public interface CustomerDAO extends DAO<Customer>{
+public interface CustomerDAO extends DAO<Customer> {
     /*
-        Return customer with specific login
-    */
+     * Return customer with specific login
+     */
     Customer findByLogin(String login);
-    
 }

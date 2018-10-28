@@ -20,16 +20,16 @@ public class Book {
 
     @Column(nullable = false)
     private String author;
-    
+
     @Column(nullable = false)
     private BookCondition condition;
-    
+
     @Column
     private boolean isAvailable = true;
 
     // Default Constructor
-    public Book() {}
-
+    public Book() {
+    }
 
     // Getters and setters
     public long getId() {
@@ -92,6 +92,4 @@ public class Book {
         }
         return true;
     }
-    
-    
 }
