@@ -49,6 +49,8 @@ public class CustomerDAOTestImpl extends AbstractDaoTest {
 
     @Test
     public void testUpdate() {
+        customerDAO.create(customer);
+
         customer.setName("Igor");
         customerDAO.update(customer);
 
@@ -57,11 +59,11 @@ public class CustomerDAOTestImpl extends AbstractDaoTest {
 
     @Test
     public void testRemove() {
+        customerDAO.create(customer);
+
         customerDAO.remove(customer);
 
         assertThat(customerDAO.findAll().size()).isEqualTo(0);
-
-        customerDAO.create(customer);
     }
 
     @Test
@@ -76,12 +78,16 @@ public class CustomerDAOTestImpl extends AbstractDaoTest {
 
     @Test
     public void testFindByName() {
+        customerDAO.create(customer);
+
         assertThat(customerDAO.findByLogin("matus.congrady")).isEqualTo(customer);
         assertThat(customerDAO.findByLogin("igor.pekar")).isNull();
     }
 
     @Test
     public void testFindAll() {
+        customerDAO.create(customer);
+
         assertThat(customerDAO.findAll()).hasSize(1).contains(customer);
     }
 }
