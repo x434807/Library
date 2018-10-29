@@ -30,6 +30,10 @@ public class Book {
     @Column
     private boolean isAvailable = true;
 
+    @ManyToOne
+    @JoinColumn(name = "customerID")
+    private Customer customer;
+
     // Default Constructor
     public Book() {
     }

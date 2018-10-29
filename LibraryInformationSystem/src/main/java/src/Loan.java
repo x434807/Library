@@ -20,7 +20,7 @@ public class Loan {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "costumerID")
     private Customer customer;
 
     @Column(name = "Timestamp")
