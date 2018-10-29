@@ -1,8 +1,10 @@
 package src;
 
 import Interfaces.DAO;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -11,36 +13,30 @@ import org.springframework.stereotype.Repository;
 public class LoanDAOImpl implements DAO<Loan> {
 
     @PersistenceContext
-    EntityManager entityManager;
-
-    /*public LoanDAOImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }*/
+    private EntityManager em;
 
     @Override
     public Loan findById(Long id) {
-        return entityManager.find(Loan.class, id);
+        return em.find(Loan.class, id);
     }
 
     @Override
     public List<Loan> findAll() {
-        return entityManager.createQuery("SELECT e FROM Loan e", Loan.class).getResultList();
+        return em.createQuery("SELECT e FROM Loan e", Loan.class).getResultList();
     }
 
     @Override
     public void create(Loan loan) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.persist(loan));
-
+        em.persist(loan);
     }
 
     @Override
     public void remove(Loan loan) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.remove(loan));
+        em.remove(loan);
     }
 
     @Override
-
     public void update(Loan loan) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.merge(loan));
+        em.merge(loan);
     }
 }
