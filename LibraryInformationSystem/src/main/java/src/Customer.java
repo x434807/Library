@@ -38,6 +38,9 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Book> books;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Loan> loans;
+
     public Customer( String name, String surname, String login, String password) {
         this.name = name;
         this.surname = surname;
