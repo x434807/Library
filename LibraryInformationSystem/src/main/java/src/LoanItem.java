@@ -4,6 +4,9 @@ package src;
  * @author Martin Piatka
  */
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +16,7 @@ public class LoanItem {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "LoanID")
@@ -37,6 +40,28 @@ public class LoanItem {
 
     protected LoanItem() {
 
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if ((other == null) || !(other instanceof LoanItem)) {
+            return false;
+        }
+        final LoanItem item = (LoanItem) other;
+        return new EqualsBuilder().append(getBook().getId(), item.getBook().getId())
+                .append(getLoan().getId(), item.getLoan().getId())
+                .append(getBorrowCondition(), item.getBorrowCondition())
+                .append(getReturnCondition(), item.getReturnCondition())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(getLoan().getId())
+                .append(getBook().getId())
+                .append(getBorrowCondition())
+                .append(getReturnCondition())
+                .toHashCode();
     }
 
     public Book getBook() {

@@ -1,5 +1,8 @@
 package src;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -17,10 +20,10 @@ public class Loan {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
-    @JoinColumn(name = "costumerID")
+    @JoinColumn(name = "CustomerID")
     private Customer customer;
 
     @Column(name = "Timestamp")
@@ -41,6 +44,24 @@ public class Loan {
 
     protected Loan() {
         items = new ArrayList<>();
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if ((other == null) || !(other instanceof Loan)) {
+            return false;
+        }
+        final Loan loan = (Loan) other;
+        return new EqualsBuilder().append(getTimestamp(), loan.getTimestamp())
+                .append(getCustomer().getId(), loan.getCustomer().getId())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder() .append(getTimestamp())
+                .append(getCustomer().getId())
+                .toHashCode();
     }
 
     public boolean addLoanedBook(Book book) {
@@ -77,11 +98,16 @@ public class Loan {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     public List<LoanItem> getItems() {
         return items;
     }
+
+    private void setItems(List<LoanItem> items){
+        this.items = items;
+    }
+
 }
