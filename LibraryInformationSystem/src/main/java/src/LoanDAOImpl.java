@@ -29,18 +29,20 @@ public class LoanDAOImpl implements DAO<Loan> {
 
     @Override
     public void create(Loan loan) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.persist(loan));
-
+        //JpaHelper.executeInsideTransaction(entityManager, em -> em.persist(loan));
+        entityManager.persist(loan);
     }
 
     @Override
     public void remove(Loan loan) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.remove(loan));
+        //JpaHelper.executeInsideTransaction(entityManager, em -> em.remove(loan));
+        entityManager.remove(loan);
     }
 
     @Override
 
     public void update(Loan loan) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.merge(loan));
+        //JpaHelper.executeInsideTransaction(entityManager, em -> em.merge(loan));
+        entityManager.merge(loan);
     }
 }
