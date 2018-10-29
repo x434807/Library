@@ -1,10 +1,15 @@
 package srcTest;
 
+import Exceptions.BookNotAvailableException;
+import java.time.ZonedDateTime;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import src.Book;
 import src.BookCondition;
 import src.Customer;
 import src.Loan;
+import src.LoanDAOImpl;
 //import org.assertj.core.api.*;
 
 /*
@@ -25,11 +30,13 @@ public class LoanTestImpl {
     private Customer cust1;
     private Customer cust2;
     
-    Book book1;
-    Book book2;
+    private Book book1;
+    private Book book2;
+    
+    private LoanDAOImpl loanDao;
     
     @BeforeMethod
-    public void initCustomers(){
+    public void initTest(){
         cust1 = new Customer();
         cust1.setName("Jozef");
         cust1.setSurname("Naked");
@@ -41,11 +48,7 @@ public class LoanTestImpl {
         cust2.setSurname("Fisrt");
         cust2.setLogin("adam");
         cust2.setPassword("firstman");
-        
-    }
-    
-    @BeforeMethod
-    public void initBooks(){
+
         book1 = new Book();
         book1.setAuthor("Dan Brown");
         book1.setISBN("0-7432-7506-3");
@@ -59,11 +62,44 @@ public class LoanTestImpl {
         book1.setName("Da Vinci Code");
         book1.setCondition(BookCondition.BAD);
         book1.setIsAvailable(false);
+        
+        
+        loan1 = new Loan(cust1,ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
+        loan2 = new Loan(cust1, ZonedDateTime.parse("2008-12-03T10:15:30+01:00[Europe/Paris]"));
+        loan3 = new Loan(cust2, ZonedDateTime.parse("2009-12-03T10:15:30+01:00[Europe/Paris]"));
+        
+        loan1.addLoanedBook(book1);
+        loan2.addLoanedBook(book1);
+        loan3.addLoanedBook(book1);
+        
+        loanDao.create(loan1);
+        loanDao.create(loan2);
+        loanDao.create(loan3);
     }
     
-    @BeforeMethod
-    public void initTest(){
-        loan1 = new Loan(cust1);
+    @Test(dependsOnMethods = {"getLoanByIdTest"})
+    public void createLoanTest(){
+        Loan loan = new Loan(cust1);
+        loan.addLoanedBook(book1);
         
+        loanDao.create(loan);
+        
+        Loan test = loanDao.findById(loan.getId());
+        
+        assertThat(test).isNotNull();
+        assertThat(test).isEqualTo(loan);
     }
+    
+    @Test(expectedExceptions = BookNotAvailableException.class)
+    public void addInAvailableBook(){
+        Loan loan = new Loan(cust2);
+        loan.addLoanedBook(book2);
+    }
+    
+    @Test
+    public void getLoanByIdTest() {
+        Loan loan = loanDao.findById(loan1.getId());
+        assertThat(loan1).isEqualTo(loan);
+    }
+    
 }
