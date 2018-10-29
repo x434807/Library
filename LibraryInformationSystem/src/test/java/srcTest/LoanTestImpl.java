@@ -74,7 +74,6 @@ public class LoanTestImpl extends AbstractDaoTest{
         loanDao.create(loan3);
     }
 
-    @Test(dependsOnMethods = {"getLoanByIdTest"})
     public void createLoanTest() throws BookNotAvailableException{
         Loan loan = new Loan(cust1);
         loan.addLoanedBook(book1);
@@ -101,8 +100,7 @@ public class LoanTestImpl extends AbstractDaoTest{
 
     @Test
     public void getAllLoansTest() {
-        List<Loan> list = loanDao.findAll();
-        assertThat(list.size()).isEqualTo(3);
+        assertThat(loanDao.findAll()).hasSize(3);
     }
 
     @Test(dependsOnMethods = { "getAllLoansTest" })
