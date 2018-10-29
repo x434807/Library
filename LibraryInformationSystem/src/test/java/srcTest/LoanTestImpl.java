@@ -69,6 +69,12 @@ public class LoanTestImpl extends AbstractDaoTest{
         loan2.addLoanedBook(book1);
         loan3.addLoanedBook(book1);
 
+        bookDAO.create(book1);
+        bookDAO.create(book2);
+
+        customerDAO.create(cust1);
+        customerDAO.create(cust2);
+
         loanDao.create(loan1);
         loanDao.create(loan2);
         loanDao.create(loan3);
