@@ -26,17 +26,17 @@ public class LoanTestImpl {
     private Loan loan1;
     private Loan loan2;
     private Loan loan3;
-    
+
     private Customer cust1;
     private Customer cust2;
-    
+
     private Book book1;
     private Book book2;
-    
+
     private LoanDAOImpl loanDao;
-    
+
     @BeforeMethod
-    public void initTest(){
+    public void initTest() {
         cust1 = new Customer();
         cust1.setName("Jozef");
         cust1.setSurname("Naked");
@@ -55,27 +55,27 @@ public class LoanTestImpl {
         book1.setName("Angels & Demons");
         book1.setCondition(BookCondition.GOOD);
         book1.setIsAvailable(true);
-        
+
         book1 = new Book();
         book1.setAuthor("Dan Brown");
         book1.setISBN("0-5632-7324-8");
         book1.setName("Da Vinci Code");
         book1.setCondition(BookCondition.BAD);
         book1.setIsAvailable(false);
-        
-        loan1 = new Loan(cust1,ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
+
+        loan1 = new Loan(cust1, ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
         loan2 = new Loan(cust1, ZonedDateTime.parse("2008-12-03T10:15:30+01:00[Europe/Paris]"));
         loan3 = new Loan(cust2, ZonedDateTime.parse("2009-12-03T10:15:30+01:00[Europe/Paris]"));
-        
+
         loan1.addLoanedBook(book1);
         loan2.addLoanedBook(book1);
         loan3.addLoanedBook(book1);
-        
+
         loanDao.create(loan1);
         loanDao.create(loan2);
         loanDao.create(loan3);
     }
-    
+
     @Test(dependsOnMethods = {"getLoanByIdTest"})
     public void createLoanTest(){
         Loan loan = new Loan(cust1);
@@ -84,43 +84,43 @@ public class LoanTestImpl {
         loanDao.create(loan);
         
         Loan test = loanDao.findById(loan.getId());
-        
+        System.out.println("asdadaasd");
         assertThat(test).isNotNull();
         assertThat(test).isEqualTo(loan);
     }
-    
+
     @Test(expectedExceptions = BookNotAvailableException.class)
-    public void addInAvailableBook(){
+    public void addInAvailableBook() {
         Loan loan = new Loan(cust2);
         loan.addLoanedBook(book2);
     }
-    
+
     @Test
     public void getLoanByIdTest() {
         Loan loan = loanDao.findById(loan1.getId());
         assertThat(loan1).isEqualTo(loan);
     }
-    
+
     @Test
-    public void getAllLoansTest(){
+    public void getAllLoansTest() {
         List<Loan> list = loanDao.findAll();
         assertThat(list.size()).isEqualTo(3);
     }
-    
-    @Test(dependsOnMethods = {"getAllLoansTest"})
-    public void updateLoansTest(){
+
+    @Test(dependsOnMethods = { "getAllLoansTest" })
+    public void updateLoansTest() {
         loan1.setCustomer(cust2);
-        
+
         loanDao.update(loan1);
-        
+
         assertThat(loanDao.findAll().size()).isEqualTo(3);
         assertThat(loanDao.findAll().get(0).getCustomer()).isEqualTo(cust2);
     }
-    
-    @Test(dependsOnMethods = {"getAllLoansTest"})
-    public void removeLoanTest(){
+
+    @Test(dependsOnMethods = { "getAllLoansTest" })
+    public void removeLoanTest() {
         assertThat(loanDao.findAll().size()).isEqualTo(3);
-        
+
         loanDao.remove(loan3);
         assertThat(loanDao.findAll().size()).isEqualTo(2);
     }
