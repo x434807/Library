@@ -1,12 +1,8 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem;
 
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.DAO;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.LoanItem;
-import org.hibernate.jpa.HibernatePersistenceProvider;
+import javax.sql.DataSource;
 
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +18,16 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import javax.sql.DataSource;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.LoanItem;
 
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = { Book.class, Customer.class, LoanItem.class, Loan.class }, basePackages = {"cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem"})
+@ComponentScan(basePackageClasses = { Book.class, Customer.class, LoanItem.class, Loan.class }, basePackages = {
+        "cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem" })
 public class PersistenceApplicationContext {
 
     @Bean

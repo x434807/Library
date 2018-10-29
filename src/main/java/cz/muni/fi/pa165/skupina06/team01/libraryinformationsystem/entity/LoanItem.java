@@ -1,14 +1,22 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * @author Martin Piatka
  */
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import javax.persistence.*;
 
 @Entity
 @Table
@@ -44,7 +52,7 @@ public class LoanItem {
     }
 
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         if ((other == null) || !(other instanceof LoanItem)) {
             return false;
         }
@@ -52,17 +60,13 @@ public class LoanItem {
         return new EqualsBuilder().append(getBook().getId(), item.getBook().getId())
                 .append(getLoan().getId(), item.getLoan().getId())
                 .append(getBorrowCondition(), item.getBorrowCondition())
-                .append(getReturnCondition(), item.getReturnCondition())
-                .isEquals();
+                .append(getReturnCondition(), item.getReturnCondition()).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(getLoan().getId())
-                .append(getBook().getId())
-                .append(getBorrowCondition())
-                .append(getReturnCondition())
-                .toHashCode();
+        return new HashCodeBuilder().append(getLoan().getId()).append(getBook().getId()).append(getBorrowCondition())
+                .append(getReturnCondition()).toHashCode();
     }
 
     public Book getBook() {

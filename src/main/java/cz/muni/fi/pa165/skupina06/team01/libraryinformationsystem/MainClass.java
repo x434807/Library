@@ -10,7 +10,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class MainClass {
 
     public static void main(String args[]) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(PersistenceApplicationContext.class);
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+                PersistenceApplicationContext.class);
         System.out.println("Hello PA165!");
     }
 }

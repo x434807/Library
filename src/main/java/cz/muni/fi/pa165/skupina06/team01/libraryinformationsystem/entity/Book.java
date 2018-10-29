@@ -1,9 +1,17 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity;
 
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
-
 import java.util.Objects;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
 
 /**
  *
@@ -22,7 +30,7 @@ public class Book {
 
     @Column(nullable = false)
     private String name;
-    
+
     @Column(nullable = false)
     private String author;
 

@@ -3,13 +3,15 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.*;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  *
  * @author Andrej Sokolík
@@ -28,7 +30,7 @@ public class Customer {
 
     @Column(name = "Surname", nullable = false)
     private String surname;
-    
+
     @Column(name = "login", unique = true, nullable = false)
     private String login;
 
@@ -41,7 +43,7 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Loan> loans;
 
-    public Customer( String name, String surname, String login, String password) {
+    public Customer(String name, String surname, String login, String password) {
         this.name = name;
         this.surname = surname;
         this.password = password;
@@ -53,8 +55,8 @@ public class Customer {
         books = new LinkedList<>();
     }
 
-    //getters and setters
-    
+    // getters and setters
+
     public long getId() {
         return id;
     }
@@ -86,7 +88,7 @@ public class Customer {
     public void setLogin(String login) {
         this.login = login;
     }
-    
+
     public String getPassword() {
         return password;
     }
@@ -130,15 +132,15 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", login=" + login + ", password=" + password + ", books=" + books + '}';
+        return "Customer{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", login=" + login + ", password="
+                + password + ", books=" + books + '}';
     }
 
-    
-    
-    
     /*
-        @param newBorrowedBook is new Book wich should be added to list od borrowed book
-        @return if succesfully added return true otherwise return false
+     * @param newBorrowedBook is new Book wich should be added to list od borrowed
+     * book
+     * 
+     * @return if succesfully added return true otherwise return false
      */
     public boolean addBorrowedBook(Book newBorrowedBook) {
         if (newBorrowedBook == null) {
@@ -148,7 +150,4 @@ public class Customer {
         return true;
     }
 
-   
-    
-    
 }
