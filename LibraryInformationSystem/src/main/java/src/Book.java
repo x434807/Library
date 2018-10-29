@@ -19,6 +19,9 @@ public class Book {
     private String ISBN;
 
     @Column(nullable = false)
+    private String name;
+    
+    @Column(nullable = false)
     private String author;
 
     @Column(nullable = false)
@@ -48,6 +51,14 @@ public class Book {
         this.ISBN = ISBN;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getAuthor() {
         return this.author;
     }
@@ -68,7 +79,7 @@ public class Book {
         return this.isAvailable;
     }
 
-    public void setAvailable(boolean available) {
+    public void setIsAvailable(boolean available) {
         this.isAvailable = available;
     }
 

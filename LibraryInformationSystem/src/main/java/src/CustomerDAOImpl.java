@@ -18,17 +18,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public void create(Customer t) {
-        entityManager.persist(t);
+        JpaHelper.executeInsideTransaction(entityManager, entityM -> entityM.persist(t));
     }
 
     @Override
     public void update(Customer entity) {
-        entityManager.merge(entity);
+        JpaHelper.executeInsideTransaction(entityManager, entityM -> entityM.merge(entity));
     }
 
     @Override
     public void remove(Customer entity) {
-        entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
+        JpaHelper.executeInsideTransaction(entityManager, entityM -> entityM.remove(entity));
     }
 
     @Override

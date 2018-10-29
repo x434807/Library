@@ -50,12 +50,12 @@ public class Customer {
 
     //getters and setters
     
-    public long getCust_id() {
+    public long id() {
         return id;
     }
 
-    public void setCust_id(int cust_id) {
-        this.id = cust_id;
+    public void id(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -74,6 +74,14 @@ public class Customer {
         this.surname = surname;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    
     public String getPassword() {
         return password;
     }
