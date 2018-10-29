@@ -39,7 +39,7 @@ public class Book {
     }
 
     // Getters and setters
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -83,8 +83,16 @@ public class Book {
         return this.isAvailable;
     }
 
-    public void setIsAvailable(boolean available) {
+    public void setAvailable(boolean available) {
         this.isAvailable = available;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override
