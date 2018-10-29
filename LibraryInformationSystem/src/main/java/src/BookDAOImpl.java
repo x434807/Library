@@ -37,7 +37,7 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public Book findByName(String name) {
         try {
-            return em.createQuery("SELECT * FROM Book WHERE Book.name = :name", Book.class).setParameter("name", name)
+            return em.createQuery("SELECT b FROM Book b WHERE b.name = :name", Book.class).setParameter("name", name)
                     .getSingleResult();
         } catch (NoResultException ex) {
             return null;
@@ -46,6 +46,6 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public List<Book> findAll() {
-        return em.createQuery("SELECT * FROM Book b", Book.class).getResultList();
+        return em.createQuery("SELECT b FROM Book b", Book.class).getResultList();
     }
 }
