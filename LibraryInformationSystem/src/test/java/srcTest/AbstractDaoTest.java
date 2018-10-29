@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import Interfaces.BookDAO;
 import Interfaces.CustomerDAO;
-import Interfaces.LoanDAO;
+import Interfaces.DAO;
+import src.Loan;
 import src.PersistenceApplicationContext;
 
 /**
@@ -30,6 +31,6 @@ public class AbstractDaoTest extends AbstractTestNGSpringContextTests {
     protected CustomerDAO customerDAO;
 
     @Autowired
-    protected LoanDAO loanDao;
+    protected DAO<Loan> loanDao;
    
 }

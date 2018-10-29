@@ -8,12 +8,16 @@ package src;
 import Interfaces.CustomerDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Andrej Sokolík
  */
+@Repository
 public class CustomerDAOImpl implements CustomerDAO {
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Override

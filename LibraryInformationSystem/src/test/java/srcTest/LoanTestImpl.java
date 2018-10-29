@@ -10,7 +10,6 @@ import src.Book;
 import src.BookCondition;
 import src.Customer;
 import src.Loan;
-import src.LoanDAOImpl;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,7 +21,7 @@ import src.LoanDAOImpl;
  *
  * @author Andrej Sokolík
  */
-public class LoanTestImpl {
+public class LoanTestImpl extends AbstractDaoTest{
     private Loan loan1;
     private Loan loan2;
     private Loan loan3;
@@ -33,7 +32,6 @@ public class LoanTestImpl {
     private Book book1;
     private Book book2;
 
-    private LoanDAOImpl loanDao;
 
     @BeforeMethod
     public void initTest() {
