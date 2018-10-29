@@ -2,6 +2,7 @@ package srcTest;
 
 import Exceptions.BookNotAvailableException;
 import java.time.ZonedDateTime;
+import java.util.List;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,7 +11,6 @@ import src.BookCondition;
 import src.Customer;
 import src.Loan;
 import src.LoanDAOImpl;
-//import org.assertj.core.api.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -63,7 +63,6 @@ public class LoanTestImpl {
         book1.setCondition(BookCondition.BAD);
         book1.setIsAvailable(false);
         
-        
         loan1 = new Loan(cust1,ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
         loan2 = new Loan(cust1, ZonedDateTime.parse("2008-12-03T10:15:30+01:00[Europe/Paris]"));
         loan3 = new Loan(cust2, ZonedDateTime.parse("2009-12-03T10:15:30+01:00[Europe/Paris]"));
@@ -102,4 +101,27 @@ public class LoanTestImpl {
         assertThat(loan1).isEqualTo(loan);
     }
     
+    @Test
+    public void getAllLoansTest(){
+        List<Loan> list = loanDao.findAll();
+        assertThat(list.size()).isEqualTo(3);
+    }
+    
+    @Test(dependsOnMethods = {"getAllLoansTest"})
+    public void updateLoansTest(){
+        loan1.setCustomer(cust2);
+        
+        loanDao.update(loan1);
+        
+        assertThat(loanDao.findAll().size()).isEqualTo(3);
+        assertThat(loanDao.findAll().get(0).getCustomer()).isEqualTo(cust2);
+    }
+    
+    @Test(dependsOnMethods = {"getAllLoansTest"})
+    public void removeLoanTest(){
+        assertThat(loanDao.findAll().size()).isEqualTo(3);
+        
+        loanDao.remove(loan3);
+        assertThat(loanDao.findAll().size()).isEqualTo(2);
+    }
 }

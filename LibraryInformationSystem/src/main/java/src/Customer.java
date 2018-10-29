@@ -46,6 +46,7 @@ public class Customer {
     }
 
     public Customer() {
+        books = new LinkedList<>();
     }
 
     //getters and setters
