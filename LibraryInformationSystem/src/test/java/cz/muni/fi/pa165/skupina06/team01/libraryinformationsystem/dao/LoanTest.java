@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
  *
  * @author Andrej Sokolík
  */
-public class LoanTestImpl extends AbstractDaoTest{
+public class LoanTest extends AbstractDaoTest{
     private Loan loan1;
     private Loan loan2;
     private Loan loan3;

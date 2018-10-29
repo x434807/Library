@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * @author Matúš Čongrády
  */
 
-public class CustomerDAOTestImpl extends AbstractDaoTest {
+public class CustomerDAOTest extends AbstractDaoTest {
 
     private Customer customer;
 

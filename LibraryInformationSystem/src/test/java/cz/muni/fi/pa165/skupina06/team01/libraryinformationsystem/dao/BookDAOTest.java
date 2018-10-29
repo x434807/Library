@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
  * @author Martin Piatka
  */
 
-public class BookDAOTestImpl extends AbstractDaoTest {
+public class BookDAOTest extends AbstractDaoTest {
 
    private Book book;
 
