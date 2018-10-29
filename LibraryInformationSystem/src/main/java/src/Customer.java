@@ -35,7 +35,7 @@ public class Customer {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "customer")
     private List<Book> books;
 
     public Customer( String name, String surname, String login, String password) {
