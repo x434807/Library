@@ -24,14 +24,14 @@ public class CustomerDAOTestImpl extends AbstractDaoTest {
         book1.setISBN("0-7432-7506-3");
         book1.setName("Angels & Demons");
         book1.setCondition(BookCondition.GOOD);
-        book1.setIsAvailable(true);
+        book1.setAvailable(true);
 
         Book book2 = new Book();
         book1.setAuthor("Dan Brown");
         book1.setISBN("0-5632-7324-8");
         book1.setName("Da Vinci Code");
         book1.setCondition(BookCondition.BAD);
-        book1.setIsAvailable(false);
+        book1.setAvailable(false);
 
         customer = new Customer("Matus", "Congrady", "matus.congrady", "heslo123");
         customer.addBorrowedBook(book1);
