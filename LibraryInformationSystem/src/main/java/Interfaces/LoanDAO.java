@@ -6,7 +6,7 @@ import java.time.ZonedDateTime;
  * @author Martin Piatka
  */
 
-public interface LoanDAO {
+public interface LoanDAO  {
 
     int getID();
 

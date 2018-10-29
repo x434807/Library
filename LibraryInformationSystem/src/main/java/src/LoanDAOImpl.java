@@ -4,14 +4,18 @@ import Interfaces.DAO;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class LoanDAOImpl implements DAO<Loan> {
 
-    private EntityManager entityManager;
+    @PersistenceContext
+    EntityManager entityManager;
 
-    public LoanDAOImpl(EntityManager entityManager) {
+    /*public LoanDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
-    }
+    }*/
 
     @Override
     public Loan findById(Long id) {
