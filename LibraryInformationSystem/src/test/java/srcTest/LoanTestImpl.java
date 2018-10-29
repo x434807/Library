@@ -34,7 +34,7 @@ public class LoanTestImpl extends AbstractDaoTest{
 
 
     @BeforeMethod
-    public void initTest() {
+    public void initTest() throws BookNotAvailableException {
         cust1 = new Customer();
         cust1.setName("Jozef");
         cust1.setSurname("Naked");
@@ -54,12 +54,12 @@ public class LoanTestImpl extends AbstractDaoTest{
         book1.setCondition(BookCondition.GOOD);
         book1.setIsAvailable(true);
 
-        book1 = new Book();
-        book1.setAuthor("Dan Brown");
-        book1.setISBN("0-5632-7324-8");
-        book1.setName("Da Vinci Code");
-        book1.setCondition(BookCondition.BAD);
-        book1.setIsAvailable(false);
+        book2 = new Book();
+        book2.setAuthor("Dan Brown");
+        book2.setISBN("0-5632-7324-8");
+        book2.setName("Da Vinci Code");
+        book2.setCondition(BookCondition.BAD);
+        book2.setIsAvailable(false);
 
         loan1 = new Loan(cust1, ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
         loan2 = new Loan(cust1, ZonedDateTime.parse("2008-12-03T10:15:30+01:00[Europe/Paris]"));
@@ -75,7 +75,7 @@ public class LoanTestImpl extends AbstractDaoTest{
     }
 
     @Test(dependsOnMethods = {"getLoanByIdTest"})
-    public void createLoanTest(){
+    public void createLoanTest() throws BookNotAvailableException{
         Loan loan = new Loan(cust1);
         loan.addLoanedBook(book1);
         
@@ -88,7 +88,7 @@ public class LoanTestImpl extends AbstractDaoTest{
     }
 
     @Test(expectedExceptions = BookNotAvailableException.class)
-    public void addInAvailableBook() {
+    public void addInAvailableBook() throws BookNotAvailableException {
         Loan loan = new Loan(cust2);
         loan.addLoanedBook(book2);
     }

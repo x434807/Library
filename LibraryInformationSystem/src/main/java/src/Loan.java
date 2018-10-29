@@ -1,5 +1,6 @@
 package src;
 
+import Exceptions.BookNotAvailableException;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -64,10 +65,13 @@ public class Loan {
                 .toHashCode();
     }
 
-    public boolean addLoanedBook(Book book) {
+    public boolean addLoanedBook(Book book) throws BookNotAvailableException {
         if (book == null)
             return false;
 
+        if(!book.isAvailable()){
+            throw new BookNotAvailableException("Inavailable book cannot be borrowed!");
+        }
         BookCondition borrowCondition = book.getCondition();
         BookCondition returnCondition = BookCondition.UNKNOWN; // Not yet returned
 
