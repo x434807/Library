@@ -42,6 +42,7 @@ public class Customer {
         this.name = name;
         this.surname = surname;
         this.password = password;
+        this.login = login;
         books = new LinkedList<>();
     }
 
