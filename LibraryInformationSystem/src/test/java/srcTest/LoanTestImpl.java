@@ -52,14 +52,14 @@ public class LoanTestImpl extends AbstractDaoTest{
         book1.setISBN("0-7432-7506-3");
         book1.setName("Angels & Demons");
         book1.setCondition(BookCondition.GOOD);
-        book1.setIsAvailable(true);
+        book1.setAvailable(true);
 
         book1 = new Book();
         book1.setAuthor("Dan Brown");
         book1.setISBN("0-5632-7324-8");
         book1.setName("Da Vinci Code");
         book1.setCondition(BookCondition.BAD);
-        book1.setIsAvailable(false);
+        book1.setAvailable(false);
 
         loan1 = new Loan(cust1, ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
         loan2 = new Loan(cust1, ZonedDateTime.parse("2008-12-03T10:15:30+01:00[Europe/Paris]"));
