@@ -5,35 +5,40 @@ import Interfaces.BookDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class BookDAOImpl implements BookDAO {
-    private EntityManager entityManager;
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public void create(Book book) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.persist(book));
+        em.persist(book);
     }
 
     @Override
     public void update(Book book) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.merge(book));
+        em.merge(book);
     }
 
     @Override
     public void remove(Book book) {
-        JpaHelper.executeInsideTransaction(entityManager, em -> em.remove(book));
+        em.remove(book);
     }
 
     @Override
     public Book findById(Long id) {
-        return entityManager.find(Book.class, id);
+        return em.find(Book.class, id);
     }
 
     @Override
     public Book findByName(String name) {
         try {
-            return entityManager.createQuery("SELECT * FROM Book WHERE Book.name = :name", Book.class)
-                    .setParameter("name", name).getSingleResult();
+            return em.createQuery("SELECT * FROM Book WHERE Book.name = :name", Book.class).setParameter("name", name)
+                    .getSingleResult();
         } catch (NoResultException ex) {
             return null;
         }
@@ -41,6 +46,6 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public List<Book> findAll() {
-        return entityManager.createQuery("SELECT b FROM Book b", Book.class).getResultList();
+        return em.createQuery("SELECT * FROM Book b", Book.class).getResultList();
     }
 }
