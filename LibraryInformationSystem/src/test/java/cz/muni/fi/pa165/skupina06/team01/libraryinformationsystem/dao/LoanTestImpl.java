@@ -1,14 +1,15 @@
-package srcTest;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao;
 
-import Exceptions.BookNotAvailableException;
 import java.time.ZonedDateTime;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.BookNotAvailableException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import src.Book;
-import src.BookCondition;
-import src.Customer;
-import src.Loan;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

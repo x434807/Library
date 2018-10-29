@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package src;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao;
 
-import Interfaces.CustomerDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import org.springframework.stereotype.Repository;
 
 /**

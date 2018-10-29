@@ -1,13 +1,14 @@
-package src;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao;
 
-import java.util.List;
-import Interfaces.BookDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class BookDAOImpl implements BookDAO {

@@ -1,4 +1,4 @@
-package Exceptions;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions;
 
 /**
  *  Exception is thrown when require book for loan but book is not available

@@ -1,5 +1,10 @@
-package src;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem;
 
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.DAO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.LoanItem;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import org.springframework.context.annotation.Bean;
@@ -22,7 +27,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = { Book.class, Loan.class, LoanItem.class, Loan.class }, basePackages = {"src", "Interfaces", "Exceptions"})
+@ComponentScan(basePackageClasses = { Book.class, Customer.class, LoanItem.class, Loan.class }, basePackages = {"cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem"})
 public class PersistenceApplicationContext {
 
     @Bean

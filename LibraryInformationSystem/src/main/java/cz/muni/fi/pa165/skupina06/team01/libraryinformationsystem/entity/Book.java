@@ -1,4 +1,6 @@
-package src;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity;
+
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
 
 import java.util.Objects;
 import javax.persistence.*;

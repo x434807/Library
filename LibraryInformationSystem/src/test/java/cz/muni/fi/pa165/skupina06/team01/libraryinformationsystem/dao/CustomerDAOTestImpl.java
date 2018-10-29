@@ -1,13 +1,12 @@
-package srcTest;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import src.Book;
-import src.BookCondition;
-import src.Customer;
 
 /**
  * @author Matúš Čongrády

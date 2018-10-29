@@ -1,4 +1,4 @@
-package Interfaces;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao;
 
 import java.util.List;
 

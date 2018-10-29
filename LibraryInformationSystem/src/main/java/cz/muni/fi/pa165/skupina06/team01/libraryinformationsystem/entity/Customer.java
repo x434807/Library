@@ -1,4 +1,4 @@
-package src;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity;
 
 import java.util.LinkedList;
 import java.util.List;

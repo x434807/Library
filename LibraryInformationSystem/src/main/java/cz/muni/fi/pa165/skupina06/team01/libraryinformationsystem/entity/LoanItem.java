@@ -1,9 +1,10 @@
-package src;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity;
 
 /**
  * @author Martin Piatka
  */
 
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
