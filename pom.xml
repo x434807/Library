@@ -14,6 +14,7 @@
 
     <modules>
         <module>persistence</module>
+        <module>../../../NetBeansProjects/ServiceLayer</module>
     </modules>
 
     <dependencies>
