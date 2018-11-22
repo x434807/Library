@@ -15,36 +15,36 @@ import java.util.List;
  */
 public interface CustomerFacade {
     /**
-     * Creates a new person in the system.
+     * Creates a new customer in the system.
      *
-     * @param person to be created
+     * @param customer to be created
      * @return the newly created person
      */
-    CustomerDTO registerCustomer(CustomerDTO person);
+    CustomerDTO registerCustomer(CustomerDTO customer);
 
     /**
-     * Removes the given person by her/his ID.
+     * Removes the given customer by his ID.
      *
      * @param id of the person to be removed
      */
     void removeCustomer(Long id);
 
     /**
-     * Updates the given person.
+     * Updates the given customer.
      *
-     * @param person the person to be updated
+     * @param customer the customer to be updated
      */
-    void updateCustomer(CustomerDTO person);
+    void updateCustomer(CustomerDTO customer);
 
     /**
-     * Returns a list of all people in the system.
+     * Returns a list of all customers in the system.
      *
-     * @return the list of all people
+     * @return the list of all customers
      */
     List<CustomerDTO> getAllPeople();
 
     /**
-     * Authenticates a person in the system.
+     * Authenticates a customer in the system.
      *
      * @param login the username of the person to be authenticated
      * @param password the person's password
@@ -53,7 +53,7 @@ public interface CustomerFacade {
     boolean authenticate(String login, String password);
 
     /**
-     * Checks whether a particular person has the required rights to perform an action.
+     * Checks whether a particular customer has the required rights to perform an action.
      *
      * @param person to be used
      * @param accessConstraints the constraints to be checked
@@ -62,28 +62,28 @@ public interface CustomerFacade {
     boolean isAllowed(CustomerDTO person, List<Role> accessConstraints);
 
     /**
-     * Finds a person by her/his ID.
+     * Finds a customer by her/his ID.
      *
-     * @param id the person's ID
+     * @param id the customer's ID
      * @return the found person
      */
-    CustomerDTO findPersonById(Long id);
+    CustomerDTO findCustomerById(Long id);
 
     /**
-     * Finds a person by her/his name.
+     * Finds a customer by his name.
      *
      * @param name the person's name
      * @return the found person
      */
-    List<CustomerDTO> findPersonByName(String name);
+    List<CustomerDTO> findCustomerByName(String name);
 
     /**
-     * Finds a person by her/his username in the system.
+     * Finds a customer by his username in the system.
      *
      * @param login the person's username in the system
      * @return the found person
      */
-    CustomerDTO findPersonByLogin(String login);
+    CustomerDTO findCustomerByLogin(String login);
 
     /**
      *Finds all loans of a specific customer 

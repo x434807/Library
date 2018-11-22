@@ -17,6 +17,8 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade.CustomerFacade;
+import cz.muni.fi.pa165.skupina06.team01.servicelayer.service.CustomerServiceImpl;
 import org.dozer.loader.api.BeanMappingBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,14 +30,14 @@ import org.springframework.context.annotation.ComponentScan;
 @Configuration
 @Import(PersistenceApplicationContext.class)
 @ComponentScan(basePackageClasses = {
-    /*PersonServiceImpl.class, 
-    PersonFacadeImpl.class,
-    AbilityServiceImpl.class,
-    AbilityFacadeImpl.class,
-    GhostServiceImpl.class,
-    GhostFacadeImpl.class,
-    HouseServiceImpl.class,
-    HouseFacadeImpl.class*/})
+    CustomerServiceImpl.class,
+    /*
+    CustomerFacadeImpl.class,
+    BookServiceImpl.class, 
+    BookFacadeImpl.class,
+    LoanServiceImpl.class,
+    LoanFacadeImpl.class,
+    */})
 public class ServiceConfig {
 
     @Bean
