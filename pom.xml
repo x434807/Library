@@ -15,6 +15,7 @@
     <modules>
         <module>persistence</module>
         <module>servicelayer</module>
+        <module>api</module>
     </modules>
 
     <dependencies>
