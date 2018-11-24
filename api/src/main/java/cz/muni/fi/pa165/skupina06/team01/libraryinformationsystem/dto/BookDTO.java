@@ -10,5 +10,9 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto;
  * @author 
  */
 public class BookDTO {
-    
+
+    public long getId() {
+        //TODO
+        return 0;
+    }
 }
