@@ -1,8 +1,9 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.LoanDAO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.LoanItemDAO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
-import org.dozer.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,11 @@ import java.util.List;
 @Service
 public class LoanServiceImpl implements LoanService {
 
-    @Inject
+    @Autowired
     private LoanDAO loanDAO;
+
+    @Autowired
+    private LoanItemDAO loanItemDAO;
 
 
     @Override

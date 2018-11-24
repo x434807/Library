@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 
+/**
+ *
+ * @author Martin Piatka
+ */
+
 @Repository
 public class LoanDAOImpl implements LoanDAO {
 
