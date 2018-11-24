@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.skupina06.team01.api.facade;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade;
 
-import cz.muni.fi.pa165.skupina06.team01.api.dto.CustomerDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.Role;
 import java.util.List;

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.skupina06.team01.api.dto;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto;
 
 /**
  *
  * @author 
  */
-public class LoanDTO {
+public class BookDTO {
     
 }

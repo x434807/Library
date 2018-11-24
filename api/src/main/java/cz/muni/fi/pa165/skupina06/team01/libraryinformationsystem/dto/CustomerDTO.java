@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.skupina06.team01.api.dto;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto;
 
 
 import java.util.List;
 import java.util.Objects;
-import cz.muni.fi.pa165.skupina06.team01.api.dto.BookDTO;
-import cz.muni.fi.pa165.skupina06.team01.api.dto.LoanDTO;
 
 /**
  *

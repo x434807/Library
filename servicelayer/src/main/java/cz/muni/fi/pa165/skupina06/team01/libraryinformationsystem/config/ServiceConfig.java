@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.skupina06.team01.servicelayer.config;
+package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.config;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -18,7 +18,7 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade.CustomerFacade;
-import cz.muni.fi.pa165.skupina06.team01.servicelayer.service.CustomerServiceImpl;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.CustomerServiceImpl;
 import org.dozer.loader.api.BeanMappingBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
