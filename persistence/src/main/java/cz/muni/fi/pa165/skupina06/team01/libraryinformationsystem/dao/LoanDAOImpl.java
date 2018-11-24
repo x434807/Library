@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 
 @Repository
-public class LoanDAOImpl implements DAO<Loan> {
+public class LoanDAOImpl implements LoanDAO {
 
     @PersistenceContext
     private EntityManager em;

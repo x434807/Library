@@ -28,6 +28,6 @@ public class AbstractDaoTest extends AbstractTestNGSpringContextTests {
     protected CustomerDAO customerDAO;
 
     @Autowired
-    protected DAO<Loan> loanDao;
+    protected LoanDAO loanDao;
    
 }
