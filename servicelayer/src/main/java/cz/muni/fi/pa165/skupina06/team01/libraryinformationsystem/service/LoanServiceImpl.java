@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
@@ -47,6 +48,18 @@ public class LoanServiceImpl implements LoanService {
         Customer customer = loan.getCustomer();
         customer.addBorrowedBook(book);
         customerDAO.update(customer);
+    }
+
+    @Override
+    public Loan loanBooks(Customer customer, List<Book> books) throws BookNotAvailableException, DataAccessException, IllegalArgumentException {
+        Loan loan = new Loan(customer, ZonedDateTime.now());
+
+        for(Book b : books){
+            addLoanedBook(loan, b);
+        }
+        create(loan);
+
+        return loan;
     }
 
     @Override
