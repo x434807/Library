@@ -5,19 +5,28 @@
  */
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade;
 
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.Role;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade.CustomerFacade;
 import java.util.List;
+import javax.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Anry
+ * @author Andrej Sokolík
  */
+
+@Service
+@Transactional
 public class CustomerFacadeImpl implements CustomerFacade{
+    
+    private static final Logger logger = LoggerFactory.getLogger(CustomerFacadeImpl.class);
 
     @Override
-    public cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO registerCustomer(cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO customer) {
+    public CustomerDTO registerCustomer(CustomerDTO customer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -27,12 +36,12 @@ public class CustomerFacadeImpl implements CustomerFacade{
     }
 
     @Override
-    public void updateCustomer(cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO customer) {
+    public void updateCustomer(CustomerDTO customer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO> getAllPeople() {
+    public List<CustomerDTO> getAllPeople() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -42,27 +51,27 @@ public class CustomerFacadeImpl implements CustomerFacade{
     }
 
     @Override
-    public boolean isAllowed(cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO person, List<Role> accessConstraints) {
+    public boolean isAllowed(CustomerDTO person, List<Role> accessConstraints) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO findCustomerById(Long id) {
+    public CustomerDTO findCustomerById(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO> findCustomerByName(String name) {
+    public List<CustomerDTO> findCustomerByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO findCustomerByLogin(String login) {
+    public CustomerDTO findCustomerByLogin(String login) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Loan> findCustomersLoans(cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO customer) {
+    public List<Loan> findCustomersLoans(CustomerDTO customer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
