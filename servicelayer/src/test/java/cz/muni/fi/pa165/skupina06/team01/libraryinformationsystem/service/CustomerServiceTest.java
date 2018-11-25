@@ -5,6 +5,8 @@
  */
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.CustomerDAO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import java.util.ArrayList;
@@ -106,7 +108,7 @@ public class CustomerServiceTest extends AbstractServiceTest {
         Long id = 0l;
         Mockito.when(customerDao.findById(id)).thenReturn(null);
 
-        assertThat(customerService.findPersonById(id)).isNull();
+        assertThat(customerService.findCustomerById(id)).isNull();
     }
 
     @Test
@@ -114,7 +116,7 @@ public class CustomerServiceTest extends AbstractServiceTest {
         Long id = 0l;
         Mockito.when(customerDao.findById(id)).thenReturn(cust1);
 
-        assertThat(customerService.findPersonById(id)).isEqualTo(cust1);
+        assertThat(customerService.findCustomerById(id)).isEqualTo(cust1);
     }
 
     
