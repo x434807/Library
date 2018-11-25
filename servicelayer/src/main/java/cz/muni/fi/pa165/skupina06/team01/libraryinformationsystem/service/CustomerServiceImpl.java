@@ -36,11 +36,11 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void removeCustomer(Long id) throws DataAccessException, IllegalArgumentException {
-        if(id == null){
-            throw new IllegalArgumentException("ID cannot be null!");
+    public void removeCustomer(Customer customer) throws DataAccessException, IllegalArgumentException {
+        if(customer == null){
+            throw new IllegalArgumentException("Customer cannot be null!");
         }
-        customerDao.remove(customerDao.findById(id));
+        customerDao.remove(customer);
     }
 
     @Override

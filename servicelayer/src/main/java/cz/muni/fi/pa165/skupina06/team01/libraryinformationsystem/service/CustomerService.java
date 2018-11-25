@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.Role;
@@ -29,11 +30,11 @@ public interface CustomerService {
     /**
      * Removes the given customer by his ID.
      *
-     * @param id of the person to be removed
+     * @param customer is a customer which is going to be removed
      * @throws DataAcessException when there is any problem in Customer
      * @throws IllegalArgumentException if customer is not customer class or is null
      */
-    void removeCustomer(Long id)throws DataAccessException,IllegalArgumentException;
+    void removeCustomer(Customer customer)throws DataAccessException,IllegalArgumentException;
 
     /**
      * Updates the given customer.

@@ -6,7 +6,7 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.Role;
 import java.util.List;
 /**
@@ -91,5 +91,5 @@ public interface CustomerFacade {
      * @param customer pecific person
      * @return list of all his loans
      */
-    List<Loan> findCustomersLoans(CustomerDTO customer);
+    List<LoanDTO> findCustomersLoans(CustomerDTO customer);
 }
