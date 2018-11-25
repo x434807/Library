@@ -13,7 +13,6 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.BeanMa
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.CustomerService;
 import java.util.List;
 import javax.transaction.Transactional;
-import org.apache.log4j.PropertyConfigurator;
 import org.dozer.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

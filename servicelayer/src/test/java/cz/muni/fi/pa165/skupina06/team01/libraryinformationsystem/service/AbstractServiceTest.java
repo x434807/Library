@@ -16,7 +16,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
  * @author Andrej Sokolík
  */
 @ContextConfiguration(classes = ServiceConfig.class)
-public abstract class AbstractServiceTest extends AbstractTestNGSpringContextTests {
+public class AbstractServiceTest extends AbstractTestNGSpringContextTests {
 
     @Inject
     protected BeanMappingService beanMappingService;
