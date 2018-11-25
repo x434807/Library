@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.config.ServiceConfig;
 import org.dozer.inject.Inject;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
