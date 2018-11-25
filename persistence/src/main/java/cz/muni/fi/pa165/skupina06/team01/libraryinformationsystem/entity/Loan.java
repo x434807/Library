@@ -76,21 +76,8 @@ public class Loan {
                 .toHashCode();
     }
 
-    public boolean addLoanedBook(Book book) throws BookNotAvailableException {
-        if (book == null)
-            return false;
-
-        if(!book.isAvailable()){
-            throw new BookNotAvailableException("Inavailable book cannot be borrowed!");
-        }
-        BookCondition borrowCondition = book.getCondition();
-        BookCondition returnCondition = BookCondition.UNKNOWN; // Not yet returned
-
-        LoanItem item = new LoanItem(book, borrowCondition, returnCondition);
+    public void addLoanItem(LoanItem item){
         items.add(item);
-
-        customer.addBorrowedBook(book);
-        return true;
     }
 
     public Customer getCustomer() {
