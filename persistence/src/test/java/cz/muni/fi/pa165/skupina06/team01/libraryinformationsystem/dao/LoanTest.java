@@ -6,6 +6,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.LoanItem;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.BookNotAvailableException;
 import org.testng.annotations.BeforeMethod;
@@ -65,9 +66,9 @@ public class LoanTest extends AbstractDaoTest{
         loan2 = new Loan(cust1, ZonedDateTime.parse("2008-12-03T10:15:30+01:00[Europe/Paris]"));
         loan3 = new Loan(cust2, ZonedDateTime.parse("2009-12-03T10:15:30+01:00[Europe/Paris]"));
 
-        loan1.addLoanedBook(book1);
-        loan2.addLoanedBook(book1);
-        loan3.addLoanedBook(book1);
+        loan1.addLoanItem(new LoanItem(book1));
+        loan2.addLoanItem(new LoanItem(book1));
+        loan3.addLoanItem(new LoanItem(book1));
 
         bookDAO.create(book1);
         bookDAO.create(book2);
@@ -82,7 +83,7 @@ public class LoanTest extends AbstractDaoTest{
 
     public void createLoanTest() throws BookNotAvailableException{
         Loan loan = new Loan(cust1);
-        loan.addLoanedBook(book1);
+        loan.addLoanItem(new LoanItem(book1));
         
         loanDao.create(loan);
         
@@ -90,12 +91,6 @@ public class LoanTest extends AbstractDaoTest{
         System.out.println("asdadaasd");
         assertThat(test).isNotNull();
         assertThat(test).isEqualTo(loan);
-    }
-
-    @Test(expectedExceptions = BookNotAvailableException.class)
-    public void addInAvailableBook() throws BookNotAvailableException {
-        Loan loan = new Loan(cust2);
-        loan.addLoanedBook(book2);
     }
 
     @Test

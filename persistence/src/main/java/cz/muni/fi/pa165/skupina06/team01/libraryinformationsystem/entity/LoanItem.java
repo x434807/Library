@@ -47,6 +47,10 @@ public class LoanItem {
         this.returnCondition = returnCondition;
     }
 
+    public LoanItem(Book book){
+        this(book, book.getCondition(), BookCondition.UNKNOWN);
+    }
+
     protected LoanItem() {
 
     }
