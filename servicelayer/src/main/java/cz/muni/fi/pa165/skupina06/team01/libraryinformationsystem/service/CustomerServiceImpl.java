@@ -63,11 +63,12 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public boolean authenticate(String login, String password) throws DataAccessException, IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Customer customer = findCustomerByLogin(login);
+        return (customer.getPassword() == null ? password == null : customer.getPassword().equals(password));
     }
 
     @Override
-    public boolean isAllowed(CustomerDTO person, List<Role> accessConstraints) throws DataAccessException, IllegalArgumentException {
+    public boolean isAllowed(Customer customer, List<Role> accessConstraints) throws DataAccessException, IllegalArgumentException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -94,7 +95,10 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public List<Loan> findCustomersLoans(Customer customer) throws DataAccessException, IllegalArgumentException {
-        return null;
+        if(customer == null){
+            throw new IllegalArgumentException("Customer cannot be null!");
+        }
+        return customer.getLoans();
     }
     
 }

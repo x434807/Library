@@ -67,13 +67,13 @@ public interface CustomerService {
     /**
      * Checks whether a particular customer has the required rights to perform an action.
      *
-     * @param person to be used
+     * @param customer to be used
      * @param accessConstraints the constraints to be checked
      * @return true if the person has the required rights, false otherwise
      * @throws DataAcessException when there is any problem in Customer
      * @throws IllegalArgumentException if customer is not customer class or is null
      */
-    boolean isAllowed(CustomerDTO person, List<Role> accessConstraints)throws DataAccessException,IllegalArgumentException;
+    boolean isAllowed(Customer customer, List<Role> accessConstraints)throws DataAccessException,IllegalArgumentException;
 
     /**
      * Finds a customer by her/his ID.

@@ -69,7 +69,8 @@ public class CustomerFacadeImpl implements CustomerFacade{
 
     @Override
     public boolean authenticate(String login, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        logger.debug("Authenticating the customer {} with the password {}", login, password);
+        return custService.authenticate(login, password);
     }
 
     @Override
@@ -97,7 +98,7 @@ public class CustomerFacadeImpl implements CustomerFacade{
 
     @Override
     public List<LoanDTO> findCustomersLoans(CustomerDTO customerDTO) {
-        logger.debug("Getting all customer's loans");
+        logger.debug("Getting all customer's {} loans", customerDTO);
         Customer customer = beanMappServ.mapTo(customerDTO, Customer.class);
         return beanMappServ.mapTo(custService.findCustomersLoans(customer), LoanDTO.class);
     }

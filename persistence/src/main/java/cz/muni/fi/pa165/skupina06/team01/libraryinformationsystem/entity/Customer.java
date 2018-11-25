@@ -105,6 +105,15 @@ public class Customer {
         this.books = books;
     }
 
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 3;
