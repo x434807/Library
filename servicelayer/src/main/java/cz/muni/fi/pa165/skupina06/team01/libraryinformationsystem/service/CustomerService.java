@@ -5,7 +5,7 @@
  */
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
+import cz.muni.fi.pa165.skupina06.team01.api.dto.CustomerDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.Role;

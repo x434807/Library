@@ -16,5 +16,10 @@
             <artifactId>LibraryInformationSystem-persistence</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cz.muni.fi.pa165.skupina06.team01</groupId>
+            <artifactId>LibraryInformationSystem-service</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 </project>

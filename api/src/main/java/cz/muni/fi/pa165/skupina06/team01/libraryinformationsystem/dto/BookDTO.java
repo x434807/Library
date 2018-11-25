@@ -11,8 +11,8 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto;
  */
 public class BookDTO {
 
-    public long getId() {
-        //TODO
-        return 0;
+    boolean getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }
