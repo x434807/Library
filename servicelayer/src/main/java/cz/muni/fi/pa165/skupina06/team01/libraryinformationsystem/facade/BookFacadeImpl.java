@@ -35,18 +35,16 @@ public class BookFacadeImpl implements BookFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public BookDTO createBook(BookDTO bookDTO) {
+    public void createBook(BookDTO bookDTO) {
         logger.debug("Creating the book {}", bookDTO);
         Book book = beanMappingService.mapTo(bookDTO, Book.class);
         bookService.createBook(book);
-        bookDTO.setId(book.getId());
-        return bookDTO;
     }
 
     @Override
-    public void removeBook(Long id) {
-        logger.debug("Removing the book with ID {}", id);
-        Book book = beanMappingService.mapTo(findBookById(id), Book.class);
+    public void removeBook(BookDTO bookDTO) {
+        logger.debug("Removing the book with ID {}", bookDTO.getId());
+        Book book = beanMappingService.mapTo(bookDTO, Book.class);
         bookService.removeBook(book);
     }
 
@@ -59,19 +57,19 @@ public class BookFacadeImpl implements BookFacade {
 
     @Override
     public BookDTO findBookById(Long id) {
-        logger.debug("Getting a customer with with id {}", id);
+        logger.debug("Getting a book with with id {}", id);
         return beanMappingService.mapTo(bookService.findBookById(id), BookDTO.class);
     }
 
     @Override
     public BookDTO findBookByName(String name) {
-        logger.debug("Getting a customer with with name {}", name);
+        logger.debug("Getting a book with with name {}", name);
         return beanMappingService.mapTo(bookService.findBookByName(name), BookDTO.class);
     }
 
     @Override
     public List<BookDTO> getAllBooks() {
-        logger.debug("Getting all customers");
+        logger.debug("Getting all books");
         List<Book> books = bookService.getAllBooks();
         if (books == null) {
             return null;
@@ -81,7 +79,7 @@ public class BookFacadeImpl implements BookFacade {
 
     @Override
     public List<BookDTO> getAllBooksThatNeedRevision() {
-        logger.debug("Getting all customers");
+        logger.debug("Getting all books that need revision");
         List<Book> books = bookService.getAllBooksThatNeedRevision();
         if (books == null) {
             return null;

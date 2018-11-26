@@ -24,6 +24,9 @@ public class BookDTO {
     private boolean isAvailable = true;
     private Customer customer;
 
+    public BookDTO() {
+    }
+
     public long getId() {
         return id;
     }

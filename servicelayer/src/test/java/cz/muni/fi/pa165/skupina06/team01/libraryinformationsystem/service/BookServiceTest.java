@@ -4,9 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 import org.mockito.InjectMocks;
@@ -38,8 +37,8 @@ public class BookServiceTest extends AbstractServiceTest {
     private Book book3;
     private Book book4;
 
-    private List<Book> listOfBooks;
-    private List<Book> listOfBooksThatNeedRevision;
+    private List<Book> listOfBooks = new ArrayList<Book>();
+    private List<Book> listOfBooksThatNeedRevision = new ArrayList<Book>();
     private List<Book> emptyList = Collections.emptyList();
 
     @BeforeMethod
