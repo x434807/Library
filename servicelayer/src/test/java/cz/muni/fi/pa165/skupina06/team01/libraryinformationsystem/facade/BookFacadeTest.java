@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -38,8 +38,8 @@ public class BookFacadeTest extends AbstractFacadeTest {
     private Book book;
     private BookDTO bookDTO;
 
-    private Long bookId = 1L;
-    private String bookName = "Motýľ";
+    private String bookName = "My House";
+    private Long bookId = 2L;
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -51,9 +51,11 @@ public class BookFacadeTest extends AbstractFacadeTest {
 
         book = new Book();
         book.setName(bookName);
+        book.setId(bookId);
 
         bookDTO = new BookDTO();
         bookDTO.setName(bookName);
+        bookDTO.setId(bookId);
     }
 
     @Test
@@ -83,23 +85,23 @@ public class BookFacadeTest extends AbstractFacadeTest {
     @Test
     public void testDeleteBook() {
         when(beanMappingService.mapTo(bookDTO, Book.class)).thenReturn(book);
-        bookFacade.createBook(bookDTO);
+        when(bookService.findBookById(bookId)).thenReturn(book);
 
-        verify(bookService).createBook(book);
-        verify(beanMappingService).mapTo(bookDTO, Book.class);
+        bookDTO.setId(bookId);
 
-        bookFacade.removeBook(bookId);
+        bookFacade.removeBook(bookDTO);
         verify(bookService).removeBook(book);
-        verify(beanMappingService.mapTo(bookDTO, Book.class));
+        verify(beanMappingService).mapTo(bookDTO, Book.class);
     }
 
     @Test
     public void testGetAll() {
         when(bookService.getAllBooks()).thenReturn(Collections.singletonList(book));
+        bookFacade.createBook(bookDTO);
 
-        List<BookDTO> abilities = bookFacade.getAllBooks();
+        List<BookDTO> books = bookFacade.getAllBooks();
 
-        assertThat(book.getName()).isEqualTo(abilities.get(0).getName());
+        assertThat(book.getName()).isEqualTo(books.get(0).getName());
         verify(bookService).getAllBooks();
         verify(beanMappingService).mapTo(Collections.singletonList(book), BookDTO.class);
     }
@@ -119,9 +121,9 @@ public class BookFacadeTest extends AbstractFacadeTest {
     public void testGetAllThatNeedRevision() {
         when(bookService.getAllBooksThatNeedRevision()).thenReturn(Collections.singletonList(book));
 
-        List<BookDTO> abilities = bookFacade.getAllBooksThatNeedRevision();
+        List<BookDTO> books = bookFacade.getAllBooksThatNeedRevision();
 
-        assertThat(book.getName()).isEqualTo(abilities.get(0).getName());
+        assertThat(bookName).isEqualTo(books.get(0).getName());
         verify(bookService).getAllBooksThatNeedRevision();
         verify(beanMappingService).mapTo(Collections.singletonList(book), BookDTO.class);
     }
@@ -129,6 +131,7 @@ public class BookFacadeTest extends AbstractFacadeTest {
     @Test
     public void testAllThatNeedRevisionWithNull() {
         when(bookService.getAllBooksThatNeedRevision()).thenReturn(null);
+        bookFacade.createBook(bookDTO);
 
         List<BookDTO> books = bookFacade.getAllBooksThatNeedRevision();
 
@@ -139,12 +142,14 @@ public class BookFacadeTest extends AbstractFacadeTest {
 
     @Test
     public void testFindById() {
+        when(beanMappingService.mapTo(bookDTO, Book.class)).thenReturn(book);
         when(bookService.findBookById(bookId)).thenReturn(book);
+        bookFacade.createBook(bookDTO);
 
-        BookDTO bookDTO = bookFacade.findBookById(bookId);
+        BookDTO result = bookFacade.findBookById(bookId);
 
-        assertThat(bookDTO).isNotNull();
-        assertThat(book.getName()).isEqualTo(bookDTO.getName());
+        assertThat(result).isNotNull();
+        assertThat(bookName).isEqualTo(result.getName());
         verify(bookService).findBookById(bookId);
         verify(beanMappingService).mapTo(book, BookDTO.class);
     }
@@ -163,11 +168,12 @@ public class BookFacadeTest extends AbstractFacadeTest {
     @Test
     public void testFindByName() {
         when(bookService.findBookByName(bookName)).thenReturn(book);
+        bookFacade.createBook(bookDTO);
 
         BookDTO bookDTO = bookFacade.findBookByName(bookName);
 
         assertThat(bookDTO).isNotNull();
-        assertThat(book.getName()).isEqualTo(bookDTO.getName());
+        assertThat(bookName).isEqualTo(bookDTO.getName());
         verify(bookService).findBookByName(bookName);
         verify(beanMappingService).mapTo(book, BookDTO.class);
     }

@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  *
@@ -106,27 +108,47 @@ public class Book {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this.ISBN);
-        return hash;
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", ISBN='" + ISBN + '\'' +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", condition=" + condition +
+                ", isAvailable=" + isAvailable +
+                ", customer=" + customer +
+                '}';
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Book other = (Book) obj;
-        if (!Objects.equals(this.ISBN, other.ISBN)) {
-            return false;
-        }
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        return new EqualsBuilder()
+                .append(id, book.id)
+                .append(isAvailable, book.isAvailable)
+                .append(ISBN, book.ISBN)
+                .append(name, book.name)
+                .append(author, book.author)
+                .append(condition, book.condition)
+                .append(customer, book.customer)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(ISBN)
+                .append(name)
+                .append(author)
+                .append(condition)
+                .append(isAvailable)
+                .append(customer)
+                .toHashCode();
     }
 }

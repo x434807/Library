@@ -19,14 +19,14 @@ public interface BookFacade {
      * @param book to be created
      * @return the newly created book
      */
-    BookDTO createBook(BookDTO book);
+    void createBook(BookDTO book);
 
     /**
      * Removes the given book by its ID.
      *
      * @param id of the book to be removed
      */
-    void removeBook(Long id);
+    void removeBook(BookDTO book);
 
     /**
      * Updates the given book.
