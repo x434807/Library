@@ -12,7 +12,7 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Custome
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
