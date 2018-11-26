@@ -31,7 +31,7 @@ import org.testng.annotations.BeforeMethod;
  */
 public class CustomerFacadeTest extends AbstractFacadeTest{
     @Mock
-    private CustomerService sustomerService;
+    private CustomerService customerService;
 
     @Autowired
     @InjectMocks
@@ -49,8 +49,8 @@ public class CustomerFacadeTest extends AbstractFacadeTest{
         MockitoAnnotations.initMocks(this);
 
         customerFacade = (CustomerFacadeImpl) unwrapProxy(customerFacade);
-        ReflectionTestUtils.setField(customerFacade, "sustomerService", sustomerService);
-        ReflectionTestUtils.setField(customerFacade, "beanMappingService", beanMappingService);
+        ReflectionTestUtils.setField(customerFacade, "custService", customerService);
+        ReflectionTestUtils.setField(customerFacade, "beanMappServ", beanMappingService);
 
         customer = new Customer();
         customer.setName(customerName);
@@ -81,7 +81,7 @@ public class CustomerFacadeTest extends AbstractFacadeTest{
         customerDTO.setSurname("Maly");
 
         customerFacade.updateCustomer(customerDTO);
-        verify(sustomerService).updateCustomer(customer);
+        verify(customerService).updateCustomer(customer);
         verify(beanMappingService, times(2)).mapTo(customerDTO, Customer.class);
     }
 
@@ -94,76 +94,76 @@ public class CustomerFacadeTest extends AbstractFacadeTest{
         verify(beanMappingService).mapTo(customerDTO, Customer.class);
 
         customerFacade.removeCustomer(customerId);
-        verify(sustomerService).removeCustomer(customer);
+        verify(customerService).removeCustomer(customer);
         verify(beanMappingService.mapTo(customerDTO, Customer.class));
     }
 
     @Test
     public void testFindAll() {
-        when(sustomerService.getAllCustomers()).thenReturn(Collections.singletonList(customer));
+        when(customerService.getAllCustomers()).thenReturn(Collections.singletonList(customer));
 
         Collection<CustomerDTO> customers = customerFacade.getAllPeople();
         List<CustomerDTO> per = (List<CustomerDTO>) customers;
 
         assertThat(customer.getName()).isEqualTo(per.get(0).getName());
-        verify(sustomerService).getAllCustomers();
+        verify(customerService).getAllCustomers();
         verify(beanMappingService).mapTo(Collections.singletonList(customer), CustomerDTO.class);
     }
 
     @Test
     public void testFindAllWithNull() {
-        when(sustomerService.getAllCustomers()).thenReturn(null);
+        when(customerService.getAllCustomers()).thenReturn(null);
 
         Collection<CustomerDTO> customers = customerFacade.getAllPeople();
 
         assertThat(customers).isNull();
-        verify(sustomerService).getAllCustomers();
+        verify(customerService).getAllCustomers();
         verify(beanMappingService, never()).mapTo(any(), any());
     }
 
     @Test
     public void testFindById() {
-        when(sustomerService.findCustomerById(customerId)).thenReturn(customer);
+        when(customerService.findCustomerById(customerId)).thenReturn(customer);
 
         CustomerDTO customerDTO = customerFacade.findCustomerById(customerId);
 
         assertThat(customerDTO).isNotNull();
         assertThat(customer.getName()).isEqualTo(customerDTO.getName());
-        verify(sustomerService).findCustomerById(customerId);
+        verify(customerService).findCustomerById(customerId);
         verify(beanMappingService).mapTo(customer, CustomerDTO.class);
     }
 
     @Test
     public void testFindByIdWithNull() {
-        when(sustomerService.findCustomerById(customerId)).thenReturn(null);
+        when(customerService.findCustomerById(customerId)).thenReturn(null);
 
         CustomerDTO customerDTO = customerFacade.findCustomerById(customerId);
 
         assertThat(customerDTO).isNull();
-        verify(sustomerService).findCustomerById(customerId);
+        verify(customerService).findCustomerById(customerId);
         verify(beanMappingService, never()).mapTo(any(), any());
     }
 
     @Test
     public void testFindByName() {
-        when(sustomerService.findCustomerByName(customerName)).thenReturn(people);
+        when(customerService.findCustomerByName(customerName)).thenReturn(people);
 
         List<CustomerDTO> customerDTO = customerFacade.findCustomerByName(customerName);
 
         assertThat(customerDTO).isNotNull();
         assertThat(customer.getName()).isEqualTo(customerDTO.get(0).getName());
-        verify(sustomerService).findCustomerByName(customerName);
+        verify(customerService).findCustomerByName(customerName);
         verify(beanMappingService).mapTo(customer, CustomerDTO.class);
     }
 
     @Test
     public void testFindByNameWithNull() {
-        when(sustomerService.findCustomerByName(customerName)).thenReturn(null);
+        when(customerService.findCustomerByName(customerName)).thenReturn(null);
 
         List<CustomerDTO> customerDTO = customerFacade.findCustomerByName(customerName);
 
         assertThat(customerDTO).isEmpty();
-        verify(sustomerService).findCustomerByName(customerName);
+        verify(customerService).findCustomerByName(customerName);
         verify(beanMappingService, never()).mapTo(any(), any());
     }
 }
