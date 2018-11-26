@@ -63,5 +63,5 @@ public interface BookFacade {
      * @param name the book's name
      * @return book with given name
      */
-    List<BookDTO> findBookByName(String name);
+    BookDTO findBookByName(String name);
 }
