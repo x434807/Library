@@ -101,6 +101,7 @@ public class CustomerFacadeTest extends AbstractFacadeTest{
     @Test
     public void testFindAll() {
         when(customerService.getAllCustomers()).thenReturn(Collections.singletonList(customer));
+        when(beanMappingService.mapTo(Collections.singletonList(customer), CustomerDTO.class)).thenReturn(Collections.singletonList(customerDTO));
 
         Collection<CustomerDTO> customers = customerFacade.getAllPeople();
         List<CustomerDTO> per = (List<CustomerDTO>) customers;

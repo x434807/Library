@@ -110,10 +110,11 @@ public class LoanFacadeTest extends AbstractFacadeTest {
     @Test
     public void testFindAll() {
         when(loanService.findAll()).thenReturn(Collections.singletonList(loan));
+        when(beanMappingService.mapTo(Collections.singletonList(loan), LoanDTO.class)).thenReturn(Collections.singletonList(loanDTO));
 
         Collection<LoanDTO> loans = loanFacade.findAll();
 
-        assertThat(loan.getCustomer()).isEqualTo(((List<LoanDTO>) loans).get(0).getCustomer());
+        assertThat(loan.getTimestamp()).isEqualTo(((List<LoanDTO>) loans).get(0).getTimestamp());
         verify(beanMappingService).mapTo(Collections.singletonList(loan), LoanDTO.class);
         verify(loanService).findAll();
     }
