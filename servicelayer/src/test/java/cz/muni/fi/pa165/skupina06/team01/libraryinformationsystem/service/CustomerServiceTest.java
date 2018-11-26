@@ -93,14 +93,14 @@ public class CustomerServiceTest extends AbstractServiceTest {
     public void getAllWithEmptyListReturnsEmptyListTest() {
         Mockito.when(customerDao.findAll()).thenReturn(emptyList);
 
-        assertThat(customerService.getAllPeople()).isEqualTo(emptyList);
+        assertThat(customerService.getAllCustomers()).isEqualTo(emptyList);
     }
 
     @Test
     public void getAllWithNonEmptyListReturnsNonEmptyListTest() {
         Mockito.when(customerDao.findAll()).thenReturn(listOfCustomers);
 
-        assertThat(customerService.getAllPeople()).isEqualTo(listOfCustomers);
+        assertThat(customerService.getAllCustomers()).isEqualTo(listOfCustomers);
     }
 
     @Test

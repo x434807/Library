@@ -7,7 +7,6 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.Role;
 import java.util.List;
 /**
  *
@@ -52,14 +51,6 @@ public interface CustomerFacade {
      */
     boolean authenticate(String login, String password);
 
-    /**
-     * Checks whether a particular customer has the required rights to perform an action.
-     *
-     * @param person to be used
-     * @param accessConstraints the constraints to be checked
-     * @return true if the person has the required rights, false otherwise
-     */
-    boolean isAllowed(CustomerDTO person, List<Role> accessConstraints);
 
     /**
      * Finds a customer by her/his ID.

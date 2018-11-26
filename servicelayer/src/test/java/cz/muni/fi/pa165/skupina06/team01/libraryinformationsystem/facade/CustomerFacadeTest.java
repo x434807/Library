@@ -5,10 +5,12 @@
  */
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade;
 
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.AbstractServiceTest;
+
 /**
  *
- * @author Anry
+ * @author Andrej Sokolík
  */
-public class CustomerFacadeTest {
+public class CustomerFacadeTest extends AbstractServiceTest{
     
 }

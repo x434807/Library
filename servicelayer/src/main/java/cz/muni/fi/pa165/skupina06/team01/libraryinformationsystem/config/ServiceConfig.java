@@ -36,7 +36,7 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade.Custome
     BookServiceImpl.class, 
     BookFacadeImpl.class,
     LoanServiceImpl.class,
-    LoanFacadeImpl.class,
+    LoanFacadeImpl.class
     */})
 public class ServiceConfig {
 

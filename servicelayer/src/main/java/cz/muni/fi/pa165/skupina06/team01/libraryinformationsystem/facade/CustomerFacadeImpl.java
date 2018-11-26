@@ -8,7 +8,6 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.Role;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.BeanMappingService;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.CustomerService;
 import java.util.List;
@@ -59,7 +58,7 @@ public class CustomerFacadeImpl implements CustomerFacade{
     @Override
     public List<CustomerDTO> getAllPeople() {
         logger.debug("Getting all customers");
-        List<Customer> customers = custService.getAllPeople();
+        List<Customer> customers = custService.getAllCustomers();
         if(customers == null){
             return null;
         }
@@ -70,11 +69,6 @@ public class CustomerFacadeImpl implements CustomerFacade{
     public boolean authenticate(String login, String password) {
         logger.debug("Authenticating the customer {} with the password {}", login, password);
         return custService.authenticate(login, password);
-    }
-
-    @Override
-    public boolean isAllowed(CustomerDTO person, List<Role> accessConstraints) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

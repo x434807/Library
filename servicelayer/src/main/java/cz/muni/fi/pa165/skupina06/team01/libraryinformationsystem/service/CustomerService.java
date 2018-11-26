@@ -5,11 +5,8 @@
  */
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.Role;
 import java.util.List;
 import org.springframework.dao.DataAccessException;
 
@@ -51,7 +48,7 @@ public interface CustomerService {
      * @return the list of all customers
      * @throws DataAcessException when there is any problem in Customer
      */
-    List<Customer> getAllPeople()throws DataAccessException;
+    List<Customer> getAllCustomers()throws DataAccessException;
 
     /**
      * Authenticates a customer in the system.
@@ -64,16 +61,6 @@ public interface CustomerService {
      */
     boolean authenticate(String login, String password)throws DataAccessException,IllegalArgumentException;
 
-    /**
-     * Checks whether a particular customer has the required rights to perform an action.
-     *
-     * @param customer to be used
-     * @param accessConstraints the constraints to be checked
-     * @return true if the person has the required rights, false otherwise
-     * @throws DataAcessException when there is any problem in Customer
-     * @throws IllegalArgumentException if customer is not customer class or is null
-     */
-    boolean isAllowed(Customer customer, List<Role> accessConstraints)throws DataAccessException,IllegalArgumentException;
 
     /**
      * Finds a customer by her/his ID.

@@ -1,10 +1,8 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.CustomerDAO;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.Role;
 import java.util.List;
 import org.dozer.inject.Inject;
 import org.springframework.dao.DataAccessException;
@@ -52,13 +50,8 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public List<Customer> getAllPeople() throws DataAccessException {
-        try{
-            return customerDao.findAll();
-        }catch(DataAccessException e){
-            System.err.println(e.getMessage());
-        }
-        return null;
+    public List<Customer> getAllCustomers() throws DataAccessException {
+        return customerDao.findAll();
     }
 
     @Override
@@ -67,10 +60,7 @@ public class CustomerServiceImpl implements CustomerService{
         return (customer.getPassword() == null ? password == null : customer.getPassword().equals(password));
     }
 
-    @Override
-    public boolean isAllowed(Customer customer, List<Role> accessConstraints) throws DataAccessException, IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public Customer findCustomerById(Long id) throws DataAccessException, IllegalArgumentException {
