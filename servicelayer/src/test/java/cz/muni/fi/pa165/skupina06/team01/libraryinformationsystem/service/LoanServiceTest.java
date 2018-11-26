@@ -1,8 +1,14 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.BookDAO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.CustomerDAO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.LoanDAO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.LoanItemDAO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.BookNotAvailableException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -22,12 +28,25 @@ public class LoanServiceTest extends AbstractServiceTest{
     @Mock
     private LoanDAO loanDAO;
 
+    @Mock
+    private LoanItemDAO loanItemDAO;
+
+    @Mock
+    private BookDAO bookDAO;
+
+    @Mock
+    private CustomerDAO customerDAO;
+
     @InjectMocks
     @Autowired
     private LoanService loanService;
 
     private Customer cust1;
     private Customer cust2;
+
+    private Book book1;
+    private Book book2;
+    private Book book3;
 
     private Loan loan1;
     private Loan loan2;
@@ -57,6 +76,27 @@ public class LoanServiceTest extends AbstractServiceTest{
         listOfLoans = new ArrayList<>();
         listOfLoans.add(loan1);
         listOfLoans.add(loan2);
+
+        book1 = new Book();
+        book1.setAuthor("Author 1");
+        book1.setName("BookName 1");
+        book1.setCondition(BookCondition.NEW);
+        book1.setAvailable(true);
+        book1.setISBN("ISBN-1");
+
+        book2 = new Book();
+        book2.setAuthor("Author 2");
+        book2.setName("BookName 2");
+        book2.setCondition(BookCondition.GOOD);
+        book2.setAvailable(true);
+        book2.setISBN("ISBN-2");
+
+        book3 = new Book();
+        book3.setAuthor("Author 3");
+        book3.setName("BookName 3");
+        book3.setCondition(BookCondition.GOOD);
+        book3.setAvailable(false);
+        book3.setISBN("ISBN-3");
 
     }
 
@@ -114,6 +154,21 @@ public class LoanServiceTest extends AbstractServiceTest{
         Mockito.when(loanDAO.findById(id)).thenReturn(loan1);
 
         assertThat(loanService.findById(id)).isEqualTo(loan1);
+    }
+
+    @Test
+    public void addLoanedBook() throws BookNotAvailableException {
+        loanService.addLoanedBook(loan1, book1);
+        loanService.addLoanedBook(loan1, book2);
+
+        assertThat(loan1.getItems().size()).isEqualTo(2);
+        assertThat(book1.isAvailable()).isEqualTo(false);
+        assertThat(book2.isAvailable()).isEqualTo(false);
+    }
+
+    @Test(expectedExceptions = BookNotAvailableException.class)
+    public void addLoanedBookUnavailable() throws BookNotAvailableException {
+        loanService.addLoanedBook(loan1, book3);
     }
 
 }
