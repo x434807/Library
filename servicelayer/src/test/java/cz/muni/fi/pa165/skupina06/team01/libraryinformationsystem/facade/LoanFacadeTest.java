@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -11,13 +11,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.LoanService;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.LoanServiceImpl;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade.LoanFacadeImpl;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -25,6 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.LoanService;
 
 public class LoanFacadeTest extends AbstractFacadeTest {
     @Mock

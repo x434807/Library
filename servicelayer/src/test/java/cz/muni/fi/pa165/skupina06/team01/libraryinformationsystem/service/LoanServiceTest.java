@@ -24,7 +24,7 @@ public class LoanServiceTest extends AbstractServiceTest{
 
     @InjectMocks
     @Autowired
-    private LoanServiceImpl loanService;
+    private LoanService loanService;
 
     private Customer cust1;
     private Customer cust2;

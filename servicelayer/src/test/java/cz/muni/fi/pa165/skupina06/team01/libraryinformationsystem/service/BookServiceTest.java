@@ -30,7 +30,7 @@ public class BookServiceTest extends AbstractServiceTest {
 
     @InjectMocks
     @Autowired
-    private BookServiceImpl bookService;
+    private BookService bookService;
 
     private Book book1;
     private Book book2;

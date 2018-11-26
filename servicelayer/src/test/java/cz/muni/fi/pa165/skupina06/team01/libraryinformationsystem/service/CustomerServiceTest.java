@@ -32,7 +32,7 @@ public class CustomerServiceTest extends AbstractServiceTest {
 
     @InjectMocks
     @Autowired
-    private CustomerServiceImpl customerService;
+    private CustomerService customerService;
 
     private Customer cust1;
     private Customer cust2;
