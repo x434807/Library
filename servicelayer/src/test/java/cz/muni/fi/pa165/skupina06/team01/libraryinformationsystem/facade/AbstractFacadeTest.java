@@ -12,6 +12,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.config.ServiceConfig;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.BeanMappingService;
 
+/**
+ *
+ * @author Matúš Čongrády, Andrej Sokolík
+ */
 @ContextConfiguration(classes = ServiceConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public abstract class AbstractFacadeTest {
@@ -29,5 +33,5 @@ public abstract class AbstractFacadeTest {
         }
         return bean;
     }
-    
 }
+
