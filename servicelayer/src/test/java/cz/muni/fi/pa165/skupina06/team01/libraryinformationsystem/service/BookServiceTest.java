@@ -99,10 +99,10 @@ public class BookServiceTest extends AbstractServiceTest {
 
     @Test
     public void findByIdWithCorrectIdReturnsBookTest() {
-        Long id = 0l;
+        Long id = book1.getId();
         when(bookDao.findById(id)).thenReturn(book1);
 
-        assertThat(bookService.findBookById(id)).isEqualTo(listOfBooksThatNeedRevision);
+        assertThat(bookService.findBookById(id)).isEqualTo(book1);
     }
 
     @Test
