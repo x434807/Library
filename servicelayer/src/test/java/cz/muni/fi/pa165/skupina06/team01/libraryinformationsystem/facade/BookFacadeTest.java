@@ -97,8 +97,8 @@ public class BookFacadeTest extends AbstractFacadeTest {
     @Test
     public void testGetAll() {
         when(bookService.getAllBooks()).thenReturn(Collections.singletonList(book));
-        bookFacade.createBook(bookDTO);
-
+        when(beanMappingService.mapTo(Collections.singletonList(book), BookDTO.class))
+                .thenReturn(Collections.singletonList(bookDTO));
         List<BookDTO> books = bookFacade.getAllBooks();
 
         assertThat(book.getName()).isEqualTo(books.get(0).getName());
@@ -120,7 +120,8 @@ public class BookFacadeTest extends AbstractFacadeTest {
     @Test
     public void testGetAllThatNeedRevision() {
         when(bookService.getAllBooksThatNeedRevision()).thenReturn(Collections.singletonList(book));
-
+        when(beanMappingService.mapTo(Collections.singletonList(book), BookDTO.class))
+                .thenReturn(Collections.singletonList(bookDTO));
         List<BookDTO> books = bookFacade.getAllBooksThatNeedRevision();
 
         assertThat(bookName).isEqualTo(books.get(0).getName());
@@ -131,7 +132,6 @@ public class BookFacadeTest extends AbstractFacadeTest {
     @Test
     public void testAllThatNeedRevisionWithNull() {
         when(bookService.getAllBooksThatNeedRevision()).thenReturn(null);
-        bookFacade.createBook(bookDTO);
 
         List<BookDTO> books = bookFacade.getAllBooksThatNeedRevision();
 
@@ -142,7 +142,7 @@ public class BookFacadeTest extends AbstractFacadeTest {
 
     @Test
     public void testFindById() {
-        when(beanMappingService.mapTo(bookDTO, Book.class)).thenReturn(book);
+        when(beanMappingService.mapTo(book, BookDTO.class)).thenReturn(bookDTO);
         when(bookService.findBookById(bookId)).thenReturn(book);
         bookFacade.createBook(bookDTO);
 
@@ -167,13 +167,14 @@ public class BookFacadeTest extends AbstractFacadeTest {
 
     @Test
     public void testFindByName() {
+        when(beanMappingService.mapTo(book, BookDTO.class)).thenReturn(bookDTO);
         when(bookService.findBookByName(bookName)).thenReturn(book);
         bookFacade.createBook(bookDTO);
 
-        BookDTO bookDTO = bookFacade.findBookByName(bookName);
+        BookDTO result = bookFacade.findBookByName(bookName);
 
-        assertThat(bookDTO).isNotNull();
-        assertThat(bookName).isEqualTo(bookDTO.getName());
+        assertThat(result).isNotNull();
+        assertThat(bookName).isEqualTo(result.getName());
         verify(bookService).findBookByName(bookName);
         verify(beanMappingService).mapTo(book, BookDTO.class);
     }
