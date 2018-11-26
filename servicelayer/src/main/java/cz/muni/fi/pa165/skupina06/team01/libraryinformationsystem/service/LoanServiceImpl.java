@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.BookDAO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.CustomerDAO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.LoanDAO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.LoanItemDAO;
@@ -28,6 +29,9 @@ public class LoanServiceImpl implements LoanService {
     @Autowired
     private CustomerDAO customerDAO;
 
+    @Autowired
+    private BookDAO bookDAO;
+
     @Override
     public void addLoanedBook(Loan loan, Book book) throws BookNotAvailableException, IllegalArgumentException, DataAccessException{
         if (book == null)
@@ -41,6 +45,9 @@ public class LoanServiceImpl implements LoanService {
 
         LoanItem loanItem = new LoanItem(book, borrowCondition, returnCondition);
         loanItemDAO.create(loanItem);
+
+        book.setAvailable(false);
+        bookDAO.update(book);
 
         loan.addLoanItem(loanItem);
         loanDAO.update(loan);

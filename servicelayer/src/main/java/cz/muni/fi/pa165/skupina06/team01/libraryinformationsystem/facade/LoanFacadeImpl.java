@@ -40,12 +40,14 @@ public class LoanFacadeImpl implements LoanFacade{
 
     @Override
     public LoanDTO findById(Long id) {
-        return beanMappingService.mapTo(loanService.findById(id), LoanDTO.class);
+        Loan loan = loanService.findById(id);
+        return loan == null ? null : beanMappingService.mapTo(loan, LoanDTO.class);
     }
 
     @Override
     public List<LoanDTO> findAll() {
-        return beanMappingService.mapTo(loanService.findAll(), LoanDTO.class);
+        List<Loan> loans = loanService.findAll();
+        return loans == null ? null : beanMappingService.mapTo(loans, LoanDTO.class);
     }
 
     @Override
