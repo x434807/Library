@@ -93,9 +93,9 @@ public class CustomerFacadeTest extends AbstractFacadeTest{
         //verify(sustomerService).registerCustomer(customer, "pass");
         verify(beanMappingService).mapTo(customerDTO, Customer.class);
 
-        customerFacade.removeCustomer(customerId);
+        customerFacade.removeCustomer(customerDTO);
         verify(customerService).removeCustomer(customer);
-        verify(beanMappingService.mapTo(customerDTO, Customer.class));
+        verify(beanMappingService, times(2)).mapTo(customerDTO, Customer.class);
     }
 
     @Test
@@ -125,6 +125,7 @@ public class CustomerFacadeTest extends AbstractFacadeTest{
     @Test
     public void testFindById() {
         when(customerService.findCustomerById(customerId)).thenReturn(customer);
+        when(beanMappingService.mapTo(customer, CustomerDTO.class)).thenReturn(customerDTO);
 
         CustomerDTO customerDTO = customerFacade.findCustomerById(customerId);
 
@@ -146,24 +147,12 @@ public class CustomerFacadeTest extends AbstractFacadeTest{
     }
 
     @Test
-    public void testFindByName() {
-        when(customerService.findCustomerByName(customerName)).thenReturn(people);
-
-        List<CustomerDTO> customerDTO = customerFacade.findCustomerByName(customerName);
-
-        assertThat(customerDTO).isNotNull();
-        assertThat(customer.getName()).isEqualTo(customerDTO.get(0).getName());
-        verify(customerService).findCustomerByName(customerName);
-        verify(beanMappingService).mapTo(customer, CustomerDTO.class);
-    }
-
-    @Test
     public void testFindByNameWithNull() {
         when(customerService.findCustomerByName(customerName)).thenReturn(null);
 
         List<CustomerDTO> customerDTO = customerFacade.findCustomerByName(customerName);
 
-        assertThat(customerDTO).isEmpty();
+        assertThat(customerDTO).isNull();
         verify(customerService).findCustomerByName(customerName);
         verify(beanMappingService, never()).mapTo(any(), any());
     }

@@ -42,9 +42,9 @@ public class CustomerFacadeImpl implements CustomerFacade{
     }
 
     @Override
-    public void removeCustomer(Long id) {
-        logger.debug("Removing the customer with ID {}", id);
-        Customer customer = beanMappServ.mapTo(findCustomerById(id), Customer.class);
+    public void removeCustomer(CustomerDTO customerDTO) {
+        logger.debug("Removing the customer {}", customerDTO);
+        Customer customer = beanMappServ.mapTo(customerDTO, Customer.class);
         custService.removeCustomer(customer);
     }
 
@@ -80,7 +80,8 @@ public class CustomerFacadeImpl implements CustomerFacade{
     @Override
     public List<CustomerDTO> findCustomerByName(String name) {
         logger.debug("Getting a customer with with the name {}", name);
-        return beanMappServ.mapTo(custService.findCustomerByName(name), CustomerDTO.class);
+        List<Customer> custs = custService.findCustomerByName(name);
+        return custs == null ? null : beanMappServ.mapTo(custs, CustomerDTO.class);
     }
 
     @Override

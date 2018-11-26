@@ -24,9 +24,9 @@ public interface CustomerFacade {
     /**
      * Removes the given customer by his ID.
      *
-     * @param id of the person to be removed
+     * @param customer the customer to be removed
      */
-    void removeCustomer(Long id);
+    void removeCustomer(CustomerDTO customer);
 
     /**
      * Updates the given customer.
