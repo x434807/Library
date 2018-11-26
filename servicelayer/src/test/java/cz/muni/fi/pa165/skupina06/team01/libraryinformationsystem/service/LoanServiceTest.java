@@ -171,4 +171,30 @@ public class LoanServiceTest extends AbstractServiceTest{
         loanService.addLoanedBook(loan1, book3);
     }
 
+    @Test
+    public void loanBooksTest() throws BookNotAvailableException {
+        book1.setAvailable(true);
+        book2.setAvailable(true);
+        List<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+        Loan loan = loanService.loanBooks(cust1, books);
+
+        assertThat(loan.getItems().size()).isEqualTo(2);
+        assertThat(book1.isAvailable()).isEqualTo(false);
+        assertThat(book2.isAvailable()).isEqualTo(false);
+    }
+
+    @Test(expectedExceptions = BookNotAvailableException.class)
+    public void loanBooksTestUnavailable() throws BookNotAvailableException {
+        book1.setAvailable(true);
+        book2.setAvailable(true);
+        book3.setAvailable(false);
+        List<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+        books.add(book3);
+        Loan loan = loanService.loanBooks(cust1, books);
+    }
+
 }
