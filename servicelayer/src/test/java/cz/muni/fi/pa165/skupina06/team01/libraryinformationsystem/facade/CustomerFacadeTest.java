@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
