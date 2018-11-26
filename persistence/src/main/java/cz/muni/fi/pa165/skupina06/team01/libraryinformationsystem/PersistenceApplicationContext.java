@@ -23,6 +23,10 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Custome
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.LoanItem;
 
+
+/**
+ * @author Matúš Čongrády
+ */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories

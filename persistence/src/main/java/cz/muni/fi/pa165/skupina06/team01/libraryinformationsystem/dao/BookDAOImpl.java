@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
 
+/**
+ * @author Matúš Čongrády
+ */
 @Repository
 public class BookDAOImpl implements BookDAO {
     @PersistenceContext
