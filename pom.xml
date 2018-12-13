@@ -40,6 +40,22 @@
                         <reuseForks>false</reuseForks>
                     </configuration>
                 </plugin>
+          <!-- embedded Tomcat 9 plugin configuration, use "mvn cargo:run" to run -->
+                <plugin>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven2-plugin</artifactId>
+                    <version>1.7.0</version>
+                    <configuration>
+                        <container>
+                            <containerId>tomcat9x</containerId>
+                            <artifactInstaller>
+                                <groupId>org.apache.tomcat</groupId>
+                                <artifactId>tomcat</artifactId>
+                                <version>9.0.12</version>
+                            </artifactInstaller>
+                        </container>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
