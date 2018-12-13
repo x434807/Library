@@ -29,6 +29,11 @@
             <artifactId>LibraryInformationSystem-service</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem</groupId>
+            <artifactId>LibraryInformationSystem-sample-data</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
           <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-api</artifactId>

@@ -8,6 +8,7 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.Config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.config.SampleDataConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -24,8 +25,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @EnableWebMvc
 @Configuration
-@Import({ServiceConfig.class, EshopWithSampleDataConfiguration.class})
-@ComponentScan(basePackages = {"cz.fi.muni.pa165.rest.controllers", "cz.fi.muni.pa165.rest.assemblers"})
+@Import({ServiceConfig.class, SampleDataConfiguration.class})
+@ComponentScan(basePackages = {"cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.controllers",
+"cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.assemblers"})
 public class RootWebContext extends WebMvcConfigurerAdapter {
 
     @Override
