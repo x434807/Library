@@ -30,6 +30,6 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{ApiContract.REST + "/*"};
+        return new String[]{"/"};
     }
 }

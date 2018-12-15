@@ -4,9 +4,10 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.CustomerDA
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 import java.util.List;
-import org.dozer.inject.Inject;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
