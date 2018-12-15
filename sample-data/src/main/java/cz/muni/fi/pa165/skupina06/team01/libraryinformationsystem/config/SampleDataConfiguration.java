@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 @Configuration
-@Import(ServiceConfiguration.class)
+@Import(ServiceConfig.class)
 @ComponentScan(basePackageClasses = {InitializerImpl.class})
 public class SampleDataConfiguration {
 
