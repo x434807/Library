@@ -48,13 +48,15 @@ public class LoanServiceImpl implements LoanService {
         loanItem.setLoan(loan);
         loanItemDAO.create(loanItem);
 
+        Customer customer = loan.getCustomer();
+
         book.setAvailable(false);
+        book.setCustomer(customer);
         bookDAO.update(book);
 
         loan.addLoanItem(loanItem);
         loanDAO.update(loan);
 
-        Customer customer = loan.getCustomer();
         customer.addBorrowedBook(book);
         customerDAO.update(customer);
     }
