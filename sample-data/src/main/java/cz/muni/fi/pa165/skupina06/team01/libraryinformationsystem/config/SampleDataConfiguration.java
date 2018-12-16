@@ -9,6 +9,11 @@ import org.springframework.context.annotation.Import;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+/**
+ * @author Martin Piatka
+ *
+ */
+
 @Configuration
 @Import(ServiceConfig.class)
 @ComponentScan(basePackageClasses = {InitializerImpl.class})
