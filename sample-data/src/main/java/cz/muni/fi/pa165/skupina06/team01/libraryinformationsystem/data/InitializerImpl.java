@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.BookNotAvailableException;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.BookService;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.CustomerService;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.LoanService;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Martin Piatka
@@ -35,6 +39,7 @@ public class InitializerImpl implements Initializer{
     public void loadData() {
         loadBooks();
         loadCustomers();
+        loadLoans();
     }
 
     void loadBooks(){
@@ -45,8 +50,22 @@ public class InitializerImpl implements Initializer{
         createCustomer("Juraj", "Pokazil", "test123", "hunter2");
     }
 
-    void createLoan(Customer customer){
+    void loadLoans(){
+        createLoan(1, Arrays.asList(1L));
+    }
 
+    void createLoan(long customerId, List<Long> bookIds){
+        Customer customer = customerService.findCustomerById(customerId);
+        List<Book> books = new ArrayList<>();
+        for(Long id : bookIds){
+            books.add(bookService.findBookById(id));
+        }
+
+        try {
+            loanService.loanBooks(customer, books);
+        } catch (BookNotAvailableException e) {
+            e.printStackTrace();
+        }
     }
 
     void createBook(String author, String title, String ISBN, BookCondition condition){
