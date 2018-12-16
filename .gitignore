@@ -35,3 +35,10 @@ target/
 /service/target/
 /web/target/
 /sample-data/target/
+
+
+.DS_Store
+frontend/node_modules/
+npm-debug.log
+frontend/dist
+yarn-error.log
