@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -21,6 +22,7 @@ import java.util.List;
 public class LoanDTO {
 
     private long id;
+    @JsonIgnoreProperties("loans")
     private CustomerDTO customer;
     private String timestamp;
     private List<LoanItemDTO> items;

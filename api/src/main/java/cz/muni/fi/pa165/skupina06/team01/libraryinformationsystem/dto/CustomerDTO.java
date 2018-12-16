@@ -6,6 +6,8 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +21,9 @@ public class CustomerDTO {
     private String surname;
     private String login;
     private String password;
+    @JsonIgnoreProperties("customer")
     private List<BookDTO> books;
+    @JsonIgnoreProperties("customer")
     private List<LoanDTO> loans;
     
     // Getters and Setters

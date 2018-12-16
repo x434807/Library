@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -22,6 +23,7 @@ public class BookDTO {
     private String author;
     private BookCondition condition;
     private boolean isAvailable = true;
+    @JsonIgnoreProperties("books")
     private Customer customer;
 
     public BookDTO() {
