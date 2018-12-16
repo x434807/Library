@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.dozer.inject.Inject;
+import javax.inject.Inject;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
