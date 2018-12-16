@@ -8,7 +8,9 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +22,7 @@ public class LoanDTO {
 
     private long id;
     private CustomerDTO customer;
-    private ZonedDateTime timestamp;
+    private String timestamp;
     private List<LoanItemDTO> items;
 
     public long getId() {
@@ -39,11 +41,11 @@ public class LoanDTO {
         this.customer = customer;
     }
 
-    public ZonedDateTime getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(ZonedDateTime timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -77,7 +79,7 @@ public class LoanDTO {
     public String toString() {
         return "LoanDTO{" +
                 "id=" + id +
-                ", customer=" + customer +
+                ", customer=" + customer.getId() +
                 ", timestamp=" + timestamp +
                 "}";
     }

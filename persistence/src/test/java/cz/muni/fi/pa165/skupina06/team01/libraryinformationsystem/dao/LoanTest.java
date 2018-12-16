@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -62,9 +63,9 @@ public class LoanTest extends AbstractDaoTest{
         book2.setCondition(BookCondition.BAD);
         book2.setAvailable(false);
 
-        loan1 = new Loan(cust1, ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"));
-        loan2 = new Loan(cust1, ZonedDateTime.parse("2008-12-03T10:15:30+01:00[Europe/Paris]"));
-        loan3 = new Loan(cust2, ZonedDateTime.parse("2009-12-03T10:15:30+01:00[Europe/Paris]"));
+        loan1 = new Loan(cust1, ("2016-12-04T22:27:17.783Z"));
+        loan2 = new Loan(cust1, ("2006-02-19T15:42:17.783Z"));
+        loan3 = new Loan(cust2, ("2009-06-09T16:15:17.783Z"));
 
         loan1.addLoanItem(new LoanItem(book1));
         loan2.addLoanItem(new LoanItem(book1));

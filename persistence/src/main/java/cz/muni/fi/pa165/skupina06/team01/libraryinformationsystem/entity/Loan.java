@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,16 +38,16 @@ public class Loan {
     private Customer customer;
 
     @Column(name = "Timestamp")
-    private ZonedDateTime timestamp;
+    private String timestamp;
 
     @OneToMany(mappedBy = "loan")
     private List<LoanItem> items;
 
     public Loan(Customer customer) {
-        this(customer, ZonedDateTime.now());
+        this(customer, Instant.now().toString());
     }
 
-    public Loan(Customer customer, ZonedDateTime timestamp) {
+    public Loan(Customer customer, String timestamp) {
         this.customer = customer;
         this.timestamp = timestamp;
         items = new ArrayList<LoanItem>();
@@ -85,11 +87,11 @@ public class Loan {
         this.customer = customer;
     }
 
-    public ZonedDateTime getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(ZonedDateTime timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
