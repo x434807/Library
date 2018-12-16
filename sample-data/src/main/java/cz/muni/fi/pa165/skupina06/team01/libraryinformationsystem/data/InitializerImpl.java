@@ -3,7 +3,6 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.data;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.BookNotAvailableException;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.BookService;
