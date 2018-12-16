@@ -11,8 +11,10 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.BeanMa
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service.LoanService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -20,12 +22,14 @@ import java.util.List;
  * @author Martin Piatka
  */
 
+@Service
+@Transactional
 public class LoanFacadeImpl implements LoanFacade{
     private static final Logger logger = LoggerFactory.getLogger(CustomerFacadeImpl.class);
 
-    @Autowired
+    @Inject
     LoanService loanService;
-    @Autowired
+    @Inject
     BeanMappingService beanMappingService;
 
     @Override
