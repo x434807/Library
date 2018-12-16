@@ -23,7 +23,7 @@ public class BookDTO {
     private String author;
     private BookCondition condition;
     private boolean isAvailable = true;
-    @JsonIgnoreProperties("books")
+    @JsonIgnoreProperties({"books", "loans"})
     private Customer customer;
 
     public BookDTO() {
