@@ -109,7 +109,7 @@ public class LoanItem {
         return loan;
     }
 
-    private void setLoan(Loan loan) {
+    public void setLoan(Loan loan) {
         this.loan = loan;
     }
 }

@@ -45,6 +45,7 @@ public class LoanServiceImpl implements LoanService {
         BookCondition returnCondition = BookCondition.UNKNOWN; // Not yet returned
 
         LoanItem loanItem = new LoanItem(book, borrowCondition, returnCondition);
+        loanItem.setLoan(loan);
         loanItemDAO.create(loanItem);
 
         book.setAvailable(false);
@@ -61,11 +62,12 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public Loan loanBooks(Customer customer, List<Book> books) throws BookNotAvailableException, DataAccessException, IllegalArgumentException {
         Loan loan = new Loan(customer, Instant.now().toString());
+        create(loan);
 
         for(Book b : books){
             addLoanedBook(loan, b);
         }
-        create(loan);
+        update(loan);
 
         return loan;
     }

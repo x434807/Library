@@ -22,9 +22,10 @@ import java.util.List;
 public class LoanDTO {
 
     private long id;
-    @JsonIgnoreProperties("loans")
+    @JsonIgnoreProperties({"loans", "books"})
     private CustomerDTO customer;
     private String timestamp;
+    @JsonIgnoreProperties("loan")
     private List<LoanItemDTO> items;
 
     public long getId() {
