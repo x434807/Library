@@ -74,7 +74,7 @@ const config = {
     new webpack.EnvironmentPlugin(envConfig),
     new HtmlWebpackPlugin({
       template: 'index.html',
-      title: 'Graphql Turtle',
+      title: 'Library',
       inject: true
     })
   ]

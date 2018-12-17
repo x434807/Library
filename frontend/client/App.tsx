@@ -1,3 +1,4 @@
+import { BooksTable } from '@components/books/Books';
 import { AppBar, CssBaseline, Toolbar, Typography } from '@material-ui/core';
 import LibraryIcon from '@material-ui/icons/LocalLibrary';
 import { Router } from '@reach/router';
@@ -19,7 +20,7 @@ const App = () => {
         </Toolbar>
       </AppBar>
       <Router>
-        <span>Hello</span>
+        <BooksTable path="/books" />
       </Router>
     </div>
   );

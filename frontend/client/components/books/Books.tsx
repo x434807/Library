@@ -5,8 +5,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import * as React from 'react';
+import { useAsync } from 'react-use';
+import { getBooks } from './book-controller';
 
-export function SimpleTable() {
+export function BooksTable({ path }: { path: string }) {
+  const { value: data, loading, error } = useAsync(getBooks, 0);
+  console.log(data);
+
   return (
     <Paper>
       <Table>
@@ -19,8 +24,15 @@ export function SimpleTable() {
             <TableCell numeric>Protein (g)</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {rows.map(row => {
+        <TableBody />
+      </Table>
+    </Paper>
+  );
+}
+
+/*
+
+{rows.map(row => {
             return (
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
@@ -32,9 +44,4 @@ export function SimpleTable() {
                 <TableCell numeric>{row.protein}</TableCell>
               </TableRow>
             );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
-}
+          })} */
