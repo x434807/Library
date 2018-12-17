@@ -1,4 +1,4 @@
-// Author: Andrej Sokolik
+// Author: Matúš Čongrády
 import { getLoans } from '@/controllers/loan-controller';
 import { LinearProgress, Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
