@@ -10,16 +10,16 @@ import java.util.List;
  */
 
 public class CreateLoanDTO {
-  private Long customerId;
+  private String customerLogin;
 
   private List<Long> bookIds;
 
-  public Long getCustomerId() {
-    return customerId;
+  public String getCustomerLogin() {
+    return customerLogin;
   }
 
-  public void setCustomerId(Long customerId) {
-    this.customerId = customerId;
+  public void setCustomerLogin(String customerLogin) {
+    this.customerLogin = customerLogin;
   }
 
   public List<Long> getBookIds() {
@@ -36,7 +36,7 @@ public class CreateLoanDTO {
       return false;
     }
     final CreateLoanDTO loan = (CreateLoanDTO) other;
-    return new EqualsBuilder().append(getCustomerId(), loan.getCustomerId())
+    return new EqualsBuilder().append(getCustomerLogin(), loan.getCustomerLogin())
             .append(getBookIds(), loan.getBookIds())
             .isEquals();
   }
@@ -51,7 +51,7 @@ public class CreateLoanDTO {
   @Override
   public String toString() {
     return "CreateLoanDTO{" +
-            "customerId=" + customerId +
+            "customerLogin=" + customerLogin +
             ", bookIds=" + bookIds +
             "}";
   }

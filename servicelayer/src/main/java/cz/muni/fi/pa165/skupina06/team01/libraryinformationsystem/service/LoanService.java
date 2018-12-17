@@ -39,7 +39,7 @@ public interface LoanService {
      */
     Loan loanBooks(Customer customer, List<Book> books) throws BookNotAvailableException, DataAccessException, IllegalArgumentException;
 
-    Loan loanBooks(Long customerId, List<Long> books) throws BookNotAvailableException, DataAccessException, IllegalArgumentException;
+    Loan loanBooks(String customerLogin, List<Long> books) throws BookNotAvailableException, DataAccessException, IllegalArgumentException;
 
 
     void returnBook(Long bookId, BookCondition returnCondition) throws DataAccessException, IllegalArgumentException;
