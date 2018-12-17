@@ -1,3 +1,5 @@
+// Author: Matúš Čongrády
+
 export const REST_API_URL = process.env.API_ENDPOINT;
 
 export const PASSWORD_SESSIONSTORAGE_KEY = 'PASSWORD';

@@ -157,7 +157,7 @@ public class Customer {
                 + password + ", books=" + books + '}';
     }
 
-    /*
+    /**
      * @param newBorrowedBook is new Book wich should be added to list od borrowed
      * book
      * 
@@ -169,6 +169,20 @@ public class Customer {
         }
         books.add(newBorrowedBook);
         return true;
+    }
+
+    /**
+     * @param book Book wich should be removed from the list of borrowed
+     * books
+     *
+     * @return true if successfully removed otherwise return false
+     */
+
+    public boolean removeBorrowedBook(Book book){
+        if (book == null) {
+            return false;
+        }
+        return books.remove(book);
     }
 
 }

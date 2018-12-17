@@ -1,3 +1,5 @@
+// Author: Matúš Čongrády
+
 import { Button, Checkbox, LinearProgress } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -11,7 +13,7 @@ import * as React from 'react';
 import { useAsync, useList } from 'react-use';
 import { getBooks } from './book-controller';
 
-export function BooksTable({ path, isAdmin }: { path: string; isAdmin: boolean }) {
+export function BooksTable({ isAdmin }: { isAdmin: boolean }) {
   const { value: data, loading, error } = useAsync(getBooks, 0);
   const [selectedCells, { set, push }] = useList([]);
 

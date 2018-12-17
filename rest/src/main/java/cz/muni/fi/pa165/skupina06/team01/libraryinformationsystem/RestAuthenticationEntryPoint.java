@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem;
 
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;

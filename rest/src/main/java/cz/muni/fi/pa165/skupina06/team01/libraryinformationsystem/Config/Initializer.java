@@ -1,4 +1,5 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.Config;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.ApiContract;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -26,6 +27,6 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{ApiContract.REST + "/*"};
     }
 }

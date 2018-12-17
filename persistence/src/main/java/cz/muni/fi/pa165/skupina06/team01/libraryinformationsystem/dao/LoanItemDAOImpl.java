@@ -42,4 +42,10 @@ public class LoanItemDAOImpl implements LoanItemDAO {
     public List<LoanItem> findAll() {
         return em.createQuery("SELECT e FROM LoanItem e", LoanItem.class).getResultList();
     }
+
+    @Override
+    public LoanItem findByBookId(Long bookId) {
+        return em.createQuery("SELECT e FROM LoanItem e where e.book.id = :id and e.returnCondition = cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition.UNKNOWN", LoanItem.class)
+                .setParameter("id", bookId).getSingleResult();
+    }
 }

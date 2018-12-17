@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.BookNotAvailableException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public interface LoanService {
      * @throws IllegalArgumentException if the id is null or not present in the database
      */
     Loan loanBooks(Customer customer, List<Book> books) throws BookNotAvailableException, DataAccessException, IllegalArgumentException;
+
+    Loan loanBooks(Long customerId, List<Long> books) throws BookNotAvailableException, DataAccessException, IllegalArgumentException;
+
+
+    void returnBook(Long bookId, BookCondition returnCondition) throws DataAccessException, IllegalArgumentException;
 
 
     /**

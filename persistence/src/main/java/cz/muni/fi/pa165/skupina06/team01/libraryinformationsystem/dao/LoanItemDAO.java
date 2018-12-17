@@ -8,4 +8,5 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.LoanIte
  */
 
 public interface LoanItemDAO extends DAO<LoanItem> {
+    LoanItem findByBookId(Long bookId);
 }

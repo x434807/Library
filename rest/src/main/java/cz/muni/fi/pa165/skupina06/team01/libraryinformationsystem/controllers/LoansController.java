@@ -7,18 +7,23 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.ApiContract;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CreateLoanDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.ReturnBookDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.BookNotAvailableException;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade.LoanFacade;
 import java.util.Collection;
 import javax.inject.Inject;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -66,5 +71,40 @@ public class LoansController {
             throw new ResourceNotFoundException();
         }
 
+    }
+
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public final void createLoan(@Valid @RequestBody CreateLoanDTO createLoanDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            //throw new Exception("Create loan error");
+        }
+
+        try {
+            loanFacade.loanBooks(createLoanDTO);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (BookNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value = "/returnBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public final void returnBook(@Valid @RequestBody ReturnBookDTO returnBookDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            //throw new Exception("return book error");
+        }
+
+        try {
+            loanFacade.returnBook(returnBookDTO);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
 }

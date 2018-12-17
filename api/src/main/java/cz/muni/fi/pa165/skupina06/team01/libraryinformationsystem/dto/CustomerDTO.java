@@ -125,6 +125,12 @@ public class CustomerDTO {
     
     @Override
     public String toString() {
+        String role = null;
+        if(isAdmin){
+            role = "ADMIN";
+        }else{
+            role="USER";
+        }
         return "CustomerDTO{" 
                 + "id=" + id 
                 + ", name=" 
@@ -133,7 +139,8 @@ public class CustomerDTO {
                 + login + ", password=" 
                 + password + ", books=" 
                 + books + ", loans=" 
-                + loans + '}';
+                + loans + ", role="
+                + role + '}';
     }
     
     

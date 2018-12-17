@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade;
 
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.BookDTO;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CustomerDTO;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.*;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Book;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
@@ -45,6 +43,19 @@ public class LoanFacadeImpl implements LoanFacade{
 
         return beanMappingService.mapTo(loanService.loanBooks(beanMappingService.mapTo(customer, Customer.class),
                 beanMappingService.mapTo(books, Book.class)), LoanDTO.class);
+    }
+
+    @Override
+    public LoanDTO loanBooks(CreateLoanDTO createLoanDTO) throws BookNotAvailableException {
+        logger.debug("Loaning books {}", createLoanDTO);
+
+        return beanMappingService.mapTo(loanService.loanBooks(createLoanDTO.getCustomerId(), createLoanDTO.getBookIds()),
+                LoanDTO.class);
+    }
+
+    @Override
+    public void returnBook(ReturnBookDTO returnBookDTO) {
+        loanService.returnBook(returnBookDTO.getBookId(), returnBookDTO.getReturnCondition());
     }
 
     @Override

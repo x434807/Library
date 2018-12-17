@@ -44,12 +44,16 @@ public class InitializerImpl implements Initializer{
     void loadBooks(){
         createBook("Tester Testovics", "Testing 101", "3216546-56468", BookCondition.GOOD);
         createBook("Peter Skúsil", "Testing 201", "3218546-56442", BookCondition.BAD);
+        createBook("František Šiška", "Všetko o testovaní", "45644968-56234", BookCondition.GOOD);
+        createBook("Autor Autorovič", "Autorovo dielo", "45644578-12654", BookCondition.BAD);
+        createBook("Človekčomá Dlhšiemenoakojeobvyklé", "Veľmi dlhý názov knihy tes test test", "4564498-1635546", BookCondition.GOOD);
     }
 
     void loadCustomers(){
-        createCustomer("Juraj", "Pokazil", "test123", "hunter2", false);
-        createCustomer("Michal", "Opravil", "repairman", "logmein", false);
-        createCustomer("Admin", "Adminič", "admin", "pass", true);
+        createCustomer("Juraj", "Pokazil", "test123", "hunter2",false);
+        createCustomer("Michal", "Opravil", "repairman", "logmein",false);
+        createCustomer("Viktor", "Výmyselný", "uniquelogin", "asdf",false);
+        createCustomer("Jaroslav", "Počítal", "counter", "password",true);
     }
 
     void loadLoans(){
