@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.ApiContract;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CreateLoanDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.LoanDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.ReturnBookDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.BookNotAvailableException;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade.LoanFacade;
@@ -75,7 +76,7 @@ public class LoansController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public final void buildHouse(@Valid @RequestBody CreateLoanDTO createLoanDTO, BindingResult result) {
+    public final void createLoan(@Valid @RequestBody CreateLoanDTO createLoanDTO, BindingResult result) {
         if (result.hasErrors()) {
             //throw new Exception("Create loan error");
         }
@@ -87,6 +88,22 @@ public class LoansController {
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (BookNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value = "/returnBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public final void returnBook(@Valid @RequestBody ReturnBookDTO returnBookDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            //throw new Exception("return book error");
+        }
+
+        try {
+            loanFacade.returnBook(returnBookDTO);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
     }

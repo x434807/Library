@@ -88,6 +88,24 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
+    public void returnBook(Long bookId, BookCondition returnCondition) throws DataAccessException, IllegalArgumentException {
+        Book book = bookDAO.findById(bookId);
+        Customer customer = book.getCustomer();
+
+        book.setCondition(returnCondition);
+        book.setAvailable(true);
+        customer.removeBorrowedBook(book);
+        book.setCustomer(null);
+
+        LoanItem loanItem = loanItemDAO.findByBookId(bookId);
+        loanItem.setReturnCondition(returnCondition);
+
+        bookDAO.update(book);
+        customerDAO.update(customer);
+        loanItemDAO.update(loanItem);
+    }
+
+    @Override
     public Loan findById(Long id) throws DataAccessException, IllegalArgumentException {
         if(id == null){
             throw new IllegalArgumentException("Id cannot be null");
