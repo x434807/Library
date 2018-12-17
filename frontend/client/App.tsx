@@ -32,10 +32,10 @@ const App = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <div style={{ position: 'relative', paddingLeft: '5%', paddingRight: '5%', marginTop: '25px' }}>
+      <div style={{ paddingLeft: '5%', paddingRight: '5%', marginTop: '25px' }}>
         {isLoggedIn ? (
           <Router>
-            <BooksTable isAdmin={isAdmin} path="/books" />
+            <BooksTable isAdmin={false} path="/books" />
           </Router>
         ) : (
           <LoginPage
