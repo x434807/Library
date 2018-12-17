@@ -14,7 +14,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,9 +51,9 @@ public class BooksController {
 
     /**
      *
-     * getting book according to id
+     * get book by id
      * 
-     * @param id user identifier
+     * @param id book identifier
      * @return BookDTO
      * @throws ResourceNotFoundException
      */
@@ -70,4 +69,23 @@ public class BooksController {
         }
 
     }
+
+    /**
+     * finds book by it's name
+     *
+     * @param name book name
+     * @return BookDTO
+     * @throws JsonProcessingException
+     */
+    @RequestMapping(value = "/search/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final BookDTO findBookByName(@PathVariable("name") String name) throws JsonProcessingException {
+        logger.debug("rest findBookByName({})", name);
+        try {
+            BookDTO bookDTO = bookFacade.findBookByName(name);
+            return bookDTO;
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException();
+        }
+    }
+
 }
