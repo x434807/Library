@@ -25,6 +25,7 @@ public class CustomerDTO {
     private List<BookDTO> books;
     @JsonIgnoreProperties("customer")
     private List<LoanDTO> loans;
+    private boolean isAdmin = false;
     
     // Getters and Setters
 
@@ -83,6 +84,15 @@ public class CustomerDTO {
     public void setLoans(List<LoanDTO> loans) {
         this.loans = loans;
     }
+
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    
     
     //HashCode and Equals
 

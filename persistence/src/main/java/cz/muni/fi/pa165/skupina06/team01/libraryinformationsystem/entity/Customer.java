@@ -42,6 +42,9 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Loan> loans;
+    
+    @Column(name = "isAdmin", nullable = false)
+    private boolean isAdmin = false;
 
     public Customer(String name, String surname, String login, String password) {
         this.name = name;
@@ -112,6 +115,15 @@ public class Customer {
     public void setLoans(List<Loan> loans) {
         this.loans = loans;
     }
+
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    
     
 
     @Override

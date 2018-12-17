@@ -47,8 +47,9 @@ public class InitializerImpl implements Initializer{
     }
 
     void loadCustomers(){
-        createCustomer("Juraj", "Pokazil", "test123", "hunter2");
-        createCustomer("Michal", "Opravil", "repairman", "logmein");
+        createCustomer("Juraj", "Pokazil", "test123", "hunter2", false);
+        createCustomer("Michal", "Opravil", "repairman", "logmein", false);
+        createCustomer("Admin", "Adminič", "admin", "pass", true);
     }
 
     void loadLoans(){
@@ -80,13 +81,14 @@ public class InitializerImpl implements Initializer{
         bookService.createBook(book);
     }
 
-    void createCustomer(String name, String surname, String login, String password){
+    void createCustomer(String name, String surname, String login, String password, boolean isAdmin){
         Customer customer = new Customer();
 
         customer.setName(name);
         customer.setSurname(surname);
         customer.setLogin(login);
         customer.setPassword(password);
+        customer.setIsAdmin(isAdmin);
 
         customerService.registerCustomer(customer);
     }
