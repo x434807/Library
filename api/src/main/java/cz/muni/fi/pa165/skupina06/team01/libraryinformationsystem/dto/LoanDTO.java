@@ -8,10 +8,6 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**

@@ -6,7 +6,7 @@
 		"sourceMap": true,
 		"baseUrl": "./",
 		"jsx": "react",
-		"lib": ["esnext", "dom"],
+		"lib": ["esnext", "dom", "es2015"],
 		"skipLibCheck": true,
 		"paths": {
 			"@reusable/*": ["client/components/_reusable/*"],

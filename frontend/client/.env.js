@@ -3,5 +3,5 @@ module.exports = {
   APP_ENV: process.env.APP_ENV || 'dev',
   DEFAULT_LOCALE: process.env.DEFAULT_LOCALE || 'en',
   IS_CREATE_MODE: true,
-  API_ENDPOINT: process.env.APP_ENV === 'prod' ? '' : 'http://localhost:4000'
+  API_ENDPOINT: 'http://localhost:8080/LibraryInformationSystem-rest'
 };
