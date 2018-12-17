@@ -1,3 +1,5 @@
+// Author: Matúš Čongrády
+
 import { SnackbarContent } from '@material-ui/core';
 import ErrorIcon from '@material-ui/icons/Error';
 import * as React from 'react';

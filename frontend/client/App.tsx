@@ -1,3 +1,5 @@
+// Author: Matúš Čongrády
+
 import { BooksTable } from '@components/books/Books';
 import { LoginPage } from '@components/LoginPage';
 import { AppBar, Button, CssBaseline, Tab, Tabs, Toolbar, Typography } from '@material-ui/core';
@@ -36,6 +38,8 @@ const App = () => {
     setIsLoggedIn(false);
   }
 
+  console.log(isAdmin);
+
   return (
     <div>
       <CssBaseline />
@@ -45,7 +49,7 @@ const App = () => {
           <Typography variant="h5" color="inherit" noWrap style={{ paddingLeft: '15px' }}>
             Library information system
           </Typography>
-          {!isLoggedIn && (
+          {isLoggedIn && (
             <Button
               onClick={logout}
               style={{ marginLeft: 'auto', color: 'white', borderColor: 'white' }}
@@ -85,8 +89,8 @@ const App = () => {
         {isLoggedIn ? (
           <>
             {currentPath === 'books' && <BooksTable isAdmin={false} />}
-            {currentPath === 'customers' && <BooksTable isAdmin={false} />}
-            {currentPath === 'loans' && <BooksTable isAdmin={false} />}
+            {isAdmin && currentPath === 'customers' && <BooksTable isAdmin={false} />}
+            {isAdmin && currentPath === 'loans' && <BooksTable isAdmin={false} />}
           </>
         ) : (
           <LoginPage

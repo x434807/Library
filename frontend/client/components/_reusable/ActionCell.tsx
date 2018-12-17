@@ -1,3 +1,5 @@
+// Author: Matúš Čongrády
+
 import { Fab, Grid } from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import DeleteIcon from '@material-ui/icons/Delete';

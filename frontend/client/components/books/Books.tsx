@@ -1,3 +1,5 @@
+// Author: Matúš Čongrády
+
 import { Button, Checkbox, LinearProgress } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';

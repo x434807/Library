@@ -1,3 +1,5 @@
+// Author: Matúš Čongrády
+
 import { Card, TextField } from '@material-ui/core';
 import * as React from 'react';
 
@@ -21,8 +23,13 @@ export function LoginPage({
     e.preventDefault();
     setSessionstorageLogin(login);
     setSessionstoragePassword(password);
-    setIsAdmin(true);
+    setIsAdmin(false);
     setIsLoggedIn(true);
+
+    const isAdmin = false;
+    if (!isAdmin) {
+      window.location.hash = 'books';
+    }
   }
 
   return (

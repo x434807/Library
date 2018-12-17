@@ -1,3 +1,5 @@
+// Author: Matúš Čongrády
+
 const getHeaders = () => {
   return {
     'x-http-login': sessionStorage.getItem('login'),
