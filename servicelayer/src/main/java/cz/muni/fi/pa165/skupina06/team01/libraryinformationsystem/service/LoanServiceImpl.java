@@ -76,8 +76,8 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public Loan loanBooks(Long customerId, List<Long> bookIds) throws BookNotAvailableException, DataAccessException, IllegalArgumentException {
-        Customer customer = customerDAO.findById(customerId);
+    public Loan loanBooks(String customerLogin, List<Long> bookIds) throws BookNotAvailableException, DataAccessException, IllegalArgumentException {
+        Customer customer = customerDAO.findByLogin(customerLogin);
         List<Book> books = new ArrayList<>();
         for(Long id : bookIds){
             books.add(bookDAO.findById(id));

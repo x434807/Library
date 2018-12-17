@@ -49,7 +49,7 @@ public class LoanFacadeImpl implements LoanFacade{
     public LoanDTO loanBooks(CreateLoanDTO createLoanDTO) throws BookNotAvailableException {
         logger.debug("Loaning books {}", createLoanDTO);
 
-        return beanMappingService.mapTo(loanService.loanBooks(createLoanDTO.getCustomerId(), createLoanDTO.getBookIds()),
+        return beanMappingService.mapTo(loanService.loanBooks(createLoanDTO.getCustomerLogin(), createLoanDTO.getBookIds()),
                 LoanDTO.class);
     }
 
