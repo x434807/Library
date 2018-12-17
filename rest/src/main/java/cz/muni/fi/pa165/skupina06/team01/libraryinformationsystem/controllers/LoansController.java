@@ -14,6 +14,8 @@ import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.Boo
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade.LoanFacade;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -76,13 +78,14 @@ public class LoansController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public final void createLoan(@Valid @RequestBody CreateLoanDTO createLoanDTO, BindingResult result) {
+    public final Map<String, String> createLoan(@Valid @RequestBody CreateLoanDTO createLoanDTO, BindingResult result) {
         if (result.hasErrors()) {
             //throw new Exception("Create loan error");
         }
 
         try {
             loanFacade.loanBooks(createLoanDTO);
+            return Collections.singletonMap("status", "ok");
         } catch (DataAccessException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
@@ -90,21 +93,24 @@ public class LoansController {
         } catch (BookNotAvailableException e) {
             e.printStackTrace();
         }
+        return Collections.singletonMap("status", "not ok");
     }
 
     @RequestMapping(value = "/returnBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public final void returnBook(@Valid @RequestBody ReturnBookDTO returnBookDTO, BindingResult result) {
+    public final Map<String, String> returnBook(@Valid @RequestBody ReturnBookDTO returnBookDTO, BindingResult result) {
         if (result.hasErrors()) {
             //throw new Exception("return book error");
         }
 
         try {
             loanFacade.returnBook(returnBookDTO);
+            return Collections.singletonMap("status", "ok");
         } catch (DataAccessException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
+        return Collections.singletonMap("status", "not ok");
     }
 }
