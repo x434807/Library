@@ -9,6 +9,7 @@ import java.util.List;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.BookDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CreateBookDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.EditBookDTO;
 
 /**
  *
@@ -38,6 +39,8 @@ public interface BookFacade {
      * @param book the book to be updated
      */
     void updateBook(BookDTO book);
+
+    void updateBook(EditBookDTO editBookDTO);
 
     /**
      * Returns a list of all books in the system.

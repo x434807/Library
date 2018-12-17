@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CreateBookDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.EditBookDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -94,13 +95,31 @@ public class BooksController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public final Map<String, String> returnBook(@Valid @RequestBody CreateBookDTO createBookDTO, BindingResult result) {
+    public final Map<String, String> createBook(@Valid @RequestBody CreateBookDTO createBookDTO, BindingResult result) {
         if (result.hasErrors()) {
             //throw new Exception("return book error");
         }
 
         try {
             bookFacade.createBook(createBookDTO);
+            return Collections.singletonMap("status", "ok");
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return Collections.singletonMap("status", "not ok");
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public final Map<String, String> editBook(@Valid @RequestBody EditBookDTO editBookDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            //throw new Exception("return book error");
+        }
+
+        try {
+            bookFacade.updateBook(editBookDTO);
             return Collections.singletonMap("status", "ok");
         } catch (DataAccessException e) {
             e.printStackTrace();

@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import javax.inject.Inject;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CreateBookDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.EditBookDTO;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,6 +71,17 @@ public class BookFacadeImpl implements BookFacade {
     public void updateBook(BookDTO bookDTO) {
         logger.debug("Updating the book {}", bookDTO);
         Book book = beanMappingService.mapTo(bookDTO, Book.class);
+        bookService.updateBook(book);
+    }
+
+    @Override
+    public void updateBook(EditBookDTO editBookDTO) {
+        Book book = bookService.findBookById(editBookDTO.getId());
+
+        book.setISBN(editBookDTO.getISBN());
+        book.setName(editBookDTO.getName());
+        book.setAuthor(editBookDTO.getAuthor());
+
         bookService.updateBook(book);
     }
 
