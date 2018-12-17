@@ -17,6 +17,7 @@
 		"max-func-body-length": false,
 		"missing-jsdoc": false,
     "typedef": false,
+    "use-simple-attributes": false,
     "function-name": false,
     "no-null-keyword": false,
     "no-reserved-keywords": false,

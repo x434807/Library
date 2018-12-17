@@ -3,7 +3,8 @@
 const getHeaders = () => {
   return {
     'x-http-login': sessionStorage.getItem('login'),
-    'x-http-password': sessionStorage.getItem('pw')
+    'x-http-password': sessionStorage.getItem('pw'),
+    'Content-type': 'application/json'
   };
 };
 

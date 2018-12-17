@@ -26,7 +26,7 @@ const App = () => {
   const currentPath = window.location.hash.substring(1);
 
   const [, setSessionstoragePassword] = useSessionStorage(PASSWORD_SESSIONSTORAGE_KEY, '');
-  const [, setSessionstorageLogin] = useSessionStorage(LOGIN_SESSIONSTORAGE_KEY, '');
+  const [login, setSessionstorageLogin] = useSessionStorage(LOGIN_SESSIONSTORAGE_KEY, '');
   const [isLoggedIn, setIsLoggedIn] = useSessionStorage(IS_LOGGED_IN_SESSIONSTORAGE_KEY, false);
   const [isAdmin, setIsAdmin] = useSessionStorage(IS_ADMIN_SESSIONSTORAGE_KEY, false);
   const [seletedNavButton, setSelectedNavButton] = React.useState(pathIndexes[currentPath]);
@@ -88,9 +88,9 @@ const App = () => {
       <div style={{ paddingLeft: '5%', paddingRight: '5%', marginTop: '25px' }}>
         {isLoggedIn ? (
           <>
-            {currentPath === 'books' && <BooksTable isAdmin={false} />}
-            {isAdmin && currentPath === 'customers' && <BooksTable isAdmin={false} />}
-            {isAdmin && currentPath === 'loans' && <BooksTable isAdmin={false} />}
+            {currentPath === 'books' && <BooksTable login={login} isAdmin={isAdmin} />}
+            {isAdmin && currentPath === 'customers' && <BooksTable isAdmin={isAdmin} />}
+            {isAdmin && currentPath === 'loans' && <BooksTable isAdmin={isAdmin} />}
           </>
         ) : (
           <LoginPage

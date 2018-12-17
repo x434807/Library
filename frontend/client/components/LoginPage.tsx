@@ -1,6 +1,6 @@
 // Author: Matúš Čongrády
 
-import { Card, TextField } from '@material-ui/core';
+import { Card, FormHelperText, TextField } from '@material-ui/core';
 import * as React from 'react';
 
 interface LoginPageProps {
@@ -18,12 +18,14 @@ export function LoginPage({
 }: LoginPageProps) {
   const [login, setLogin] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [isLoginTouched, setIsLoginTouched] = React.useState(false);
+  const [isPasswordTouched, setIsPasswordTouched] = React.useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     setSessionstorageLogin(login);
     setSessionstoragePassword(password);
-    setIsAdmin(false);
+    setIsAdmin(true);
     setIsLoggedIn(true);
 
     const isAdmin = false;
@@ -31,6 +33,9 @@ export function LoginPage({
       window.location.hash = 'books';
     }
   }
+
+  const isLoginError = isLoginTouched && !login;
+  const isPasswordError = isPasswordTouched && !password;
 
   return (
     <div
@@ -44,23 +49,37 @@ export function LoginPage({
     >
       <Card style={{ padding: '30px', width: '350px' }}>
         <form autoComplete="off" onSubmit={handleSubmit}>
-          <TextField
-            style={{ width: '100%' }}
-            label="Login"
-            value={login}
-            onChange={e => setLogin(e.target.value)}
-            margin="normal"
-          />
+          <div>
+            <TextField
+              style={{ width: '100%' }}
+              label="Login"
+              value={login}
+              error={isLoginError}
+              onChange={e => {
+                setLogin(e.target.value);
+                setIsLoginTouched(true);
+              }}
+              margin="normal"
+            />
+            {isLoginError && <FormHelperText>Login can not be empty</FormHelperText>}
+          </div>
           &nbsp;&nbsp;
-          <TextField
-            style={{ width: '100%' }}
-            label="Password"
-            value={password}
-            type="password"
-            onChange={e => setPassword(e.target.value)}
-            margin="normal"
-          />
-          <button type="submit" hidden />
+          <div>
+            <TextField
+              style={{ width: '100%' }}
+              label="Password"
+              value={password}
+              error={isPasswordError}
+              type="password"
+              onChange={e => {
+                setPassword(e.target.value);
+                setIsPasswordTouched(true);
+              }}
+              margin="normal"
+            />
+            <button disabled={!password || !login} type="submit" hidden />
+            {isPasswordError && <FormHelperText>Password can not be empty</FormHelperText>}
+          </div>
         </form>
       </Card>
     </div>
