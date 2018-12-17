@@ -44,10 +44,12 @@ public class InitializerImpl implements Initializer{
 
     void loadBooks(){
         createBook("Tester Testovics", "Testing 101", "3216546-56468", BookCondition.GOOD);
+        createBook("Peter Skúsil", "Testing 201", "3218546-56442", BookCondition.BAD);
     }
 
     void loadCustomers(){
         createCustomer("Juraj", "Pokazil", "test123", "hunter2");
+        createCustomer("Michal", "Opravil", "repairman", "logmein");
     }
 
     void loadLoans(){
