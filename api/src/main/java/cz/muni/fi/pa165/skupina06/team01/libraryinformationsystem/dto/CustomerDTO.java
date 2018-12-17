@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class CustomerDTO {
     private String name;
     private String surname;
     private String login;
+    @JsonIgnore
     private String password;
     @JsonIgnoreProperties("customer")
     private List<BookDTO> books;
