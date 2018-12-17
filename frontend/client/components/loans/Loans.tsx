@@ -1,4 +1,5 @@
-// Author: Martin Piatka
+// Author: Andrej Sokolik
+import { getLoans } from '@/controllers/loan-controller';
 import { LinearProgress, Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -9,12 +10,9 @@ import TableRow from '@material-ui/core/TableRow';
 import { ErrorMessage } from '@reusable/ErrorMessage';
 import * as React from 'react';
 import { useAsync } from 'react-use';
-import { getCustomers } from '../../controllers/customer-controller';
 
-export function CustomersTable() {
-  const { value: data, loading, error } = useAsync(getCustomers, 0);
-
-  console.log(data);
+export function LoansTable() {
+  const { value: data, loading, error } = useAsync(getLoans, 0);
 
   return (
     <>
@@ -29,21 +27,19 @@ export function CustomersTable() {
             <Table padding="dense">
               <TableHead>
                 <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Surname</TableCell>
-                  <TableCell>Login</TableCell>
+                  <TableCell>Customer</TableCell>
+                  <TableCell>Loaned at</TableCell>
+                  <TableCell>Books</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {data.map(entity => (
                   <TableRow key={entity.id}>
-                    <TableCell padding="dense" component="th" scope="row">
-                      {entity.id}
+                    <TableCell>
+                      {entity.customer.name}&nbsp;{entity.customer.surname}
                     </TableCell>
-                    <TableCell>{entity.name}</TableCell>
-                    <TableCell>{entity.surname}</TableCell>
-                    <TableCell>{entity.login}</TableCell>
+                    <TableCell>{new Date(entity.timestamp).toLocaleString()}</TableCell>
+                    <TableCell>{entity.items.map(item => item.book.name).join(' | ')}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

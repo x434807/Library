@@ -1,6 +1,8 @@
 // Author: Matúš Čongrády
 
 import { BooksTable } from '@components/books/Books';
+import { CustomersTable } from '@components/customers/Customers';
+import { LoansTable } from '@components/loans/Loans';
 import { LoginPage } from '@components/LoginPage';
 import { AppBar, Button, CssBaseline, Tab, Tabs, Toolbar, Typography } from '@material-ui/core';
 import LibraryIcon from '@material-ui/icons/LocalLibrary';
@@ -37,8 +39,6 @@ const App = () => {
     setIsAdmin(false);
     setIsLoggedIn(false);
   }
-
-  console.log(isAdmin);
 
   return (
     <div>
@@ -89,8 +89,8 @@ const App = () => {
         {isLoggedIn ? (
           <>
             {currentPath === 'books' && <BooksTable login={login} isAdmin={isAdmin} />}
-            {isAdmin && currentPath === 'customers' && <BooksTable isAdmin={isAdmin} />}
-            {isAdmin && currentPath === 'loans' && <BooksTable isAdmin={isAdmin} />}
+            {isAdmin && currentPath === 'customers' && <CustomersTable />}
+            {isAdmin && currentPath === 'loans' && <LoansTable />}
           </>
         ) : (
           <LoginPage

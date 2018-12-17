@@ -7,12 +7,10 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Divider,
   FormControl,
   FormHelperText,
-  Grid,
   LinearProgress,
   TextField,
   Typography
@@ -95,7 +93,7 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
   return (
     <>
       {loading && <LinearProgress />}
-      {error && <ErrorMessage message={error} />}
+      {error && <ErrorMessage message="Error" />}
       {data && (
         <>
           <Paper>

@@ -3,7 +3,7 @@
 import { REST_API_URL } from '@/contants';
 import { request } from '@/utils/fetch';
 
-export const getBooks = () => {
+export const getLoans = () => {
   return request(`${REST_API_URL}/loans`);
 };
 
