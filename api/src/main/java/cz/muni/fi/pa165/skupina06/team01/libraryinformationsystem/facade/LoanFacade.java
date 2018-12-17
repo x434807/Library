@@ -35,6 +35,7 @@ public interface LoanFacade {
 
     LoanDTO loanBooks(CreateLoanDTO createLoanDTO) throws BookNotAvailableException;
 
+
     /**
      * Finds loan by id
      * @param id
