@@ -92,6 +92,11 @@ public class LoanServiceImpl implements LoanService {
         Book book = bookDAO.findById(bookId);
         Customer customer = book.getCustomer();
 
+        if(book.isAvailable()){
+            //book is not borrowed, do nothing
+            return;
+        }
+
         book.setCondition(returnCondition);
         book.setAvailable(true);
         customer.removeBorrowedBook(book);
