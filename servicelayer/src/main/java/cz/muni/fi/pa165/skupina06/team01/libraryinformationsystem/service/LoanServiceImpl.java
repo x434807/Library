@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -72,6 +73,18 @@ public class LoanServiceImpl implements LoanService {
         update(loan);
 
         return loan;
+    }
+
+    @Override
+    public Loan loanBooks(Long customerId, List<Long> bookIds) throws BookNotAvailableException, DataAccessException, IllegalArgumentException {
+        Customer customer = customerDAO.findById(customerId);
+        List<Book> books = new ArrayList<>();
+        for(Long id : bookIds){
+            books.add(bookDAO.findById(id));
+        }
+
+
+        return loanBooks(customer, books);
     }
 
     @Override

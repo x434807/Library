@@ -38,6 +38,8 @@ public interface LoanService {
      */
     Loan loanBooks(Customer customer, List<Book> books) throws BookNotAvailableException, DataAccessException, IllegalArgumentException;
 
+    Loan loanBooks(Long customerId, List<Long> books) throws BookNotAvailableException, DataAccessException, IllegalArgumentException;
+
 
     /**
      * Finds a loan by its ID.
