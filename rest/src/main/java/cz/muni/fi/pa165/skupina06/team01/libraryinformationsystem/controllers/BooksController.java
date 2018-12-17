@@ -76,6 +76,27 @@ public class BooksController {
     }
 
     /**
+     *
+     * remove book by id
+     *
+     * @param id book identifier
+     * @return BookDTO
+     * @throws ResourceNotFoundException
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final Map<String, String> deleteBook(@PathVariable("id") long id) throws Exception {
+        logger.debug("rest getBook({})", id);
+
+        try {
+            BookDTO bookDTO = bookFacade.findBookById(id);
+            bookFacade.removeBook(bookDTO);
+            return Collections.singletonMap("status", "ok");
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException();
+        }
+    }
+
+    /**
      * finds book by it's name
      *
      * @param name book name
