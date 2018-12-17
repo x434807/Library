@@ -10,6 +10,9 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import javax.inject.Inject;
+
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CreateBookDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -38,6 +41,21 @@ public class BookFacadeImpl implements BookFacade {
     public void createBook(BookDTO bookDTO) {
         logger.debug("Creating the book {}", bookDTO);
         Book book = beanMappingService.mapTo(bookDTO, Book.class);
+        bookService.createBook(book);
+    }
+
+    @Override
+    public void createBook(CreateBookDTO createBookDTO) {
+        Book book = new Book();
+        book.setCondition(BookCondition.NEW);
+        book.setAvailable(true);
+        book.setName(createBookDTO.getName());
+        book.setAuthor(createBookDTO.getAuthor());
+        book.setISBN(createBookDTO.getISBN());
+        System.out.print("Creating book with ISBN");
+        System.out.println(book);
+        System.out.println(createBookDTO);
+
         bookService.createBook(book);
     }
 

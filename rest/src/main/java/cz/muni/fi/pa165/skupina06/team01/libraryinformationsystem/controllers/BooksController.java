@@ -6,18 +6,22 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.controllers;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CreateBookDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.ApiContract;
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.BookDTO;
@@ -86,6 +90,24 @@ public class BooksController {
         } catch (Exception ex) {
             throw new ResourceNotFoundException();
         }
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public final Map<String, String> returnBook(@Valid @RequestBody CreateBookDTO createBookDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            //throw new Exception("return book error");
+        }
+
+        try {
+            bookFacade.createBook(createBookDTO);
+            return Collections.singletonMap("status", "ok");
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return Collections.singletonMap("status", "not ok");
     }
 
 }

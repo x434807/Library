@@ -4,16 +4,16 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class CreateBookDTO {
-    private String ISBN;
+    private String isbn;
     private String name;
     private String author;
 
     public String getISBN() {
-        return ISBN;
+        return isbn;
     }
 
     public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+        this.isbn = ISBN;
     }
 
     public String getName() {
@@ -41,7 +41,7 @@ public class CreateBookDTO {
         CreateBookDTO that = (CreateBookDTO) o;
 
         return new EqualsBuilder()
-                .append(ISBN, that.ISBN)
+                .append(isbn, that.isbn)
                 .append(name, that.name)
                 .append(author, that.author)
                 .isEquals();
@@ -50,7 +50,7 @@ public class CreateBookDTO {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(ISBN)
+                .append(isbn)
                 .append(name)
                 .append(author)
                 .toHashCode();
@@ -59,7 +59,7 @@ public class CreateBookDTO {
     @Override
     public String toString() {
         return "CreateBookDTO{" +
-                "ISBN='" + ISBN + '\'' +
+                "ISBN='" + isbn + '\'' +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 '}';

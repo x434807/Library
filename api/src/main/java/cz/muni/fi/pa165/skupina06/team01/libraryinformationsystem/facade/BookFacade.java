@@ -8,6 +8,8 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.facade;
 import java.util.List;
 
 import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.BookDTO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dto.CreateBookDTO;
+
 /**
  *
  * @author Matúš Čongrády
@@ -20,6 +22,8 @@ public interface BookFacade {
      * @return the newly created book
      */
     void createBook(BookDTO book);
+
+    void createBook(CreateBookDTO createBookDTO);
 
     /**
      * Removes the given book by its ID.
