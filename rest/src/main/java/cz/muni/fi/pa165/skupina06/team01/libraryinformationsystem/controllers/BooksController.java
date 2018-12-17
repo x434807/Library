@@ -83,7 +83,7 @@ public class BooksController {
      * @return BookDTO
      * @throws ResourceNotFoundException
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final Map<String, String> deleteBook(@PathVariable("id") long id) throws Exception {
         logger.debug("rest getBook({})", id);
 
