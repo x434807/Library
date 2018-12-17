@@ -68,4 +68,26 @@ public class CustomersController {
 
     }
     
+     /**
+     *
+     * getting customer according to id
+     * 
+     * @param login user identifier
+     * @return CustomerDTO
+     * @throws ResourceNotFoundException
+     */
+    @RequestMapping(value = "/{login}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final CustomerDTO isAdmin(@PathVariable("login") String login) throws Exception {
+
+        logger.debug("rest isAdmin({})", login);
+
+        try {
+            CustomerDTO customerDTO = customerFacade.findCustomerByLogin(login);
+            return customerDTO;
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException();
+        }
+
+    }
+    
 }
