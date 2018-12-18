@@ -26,13 +26,18 @@ import { ErrorMessage } from '@reusable/ErrorMessage';
 import * as React from 'react';
 import { useBoolean } from 'react-hanger';
 import { useAsync, useList } from 'react-use';
-import { getBooks } from '../../controllers/book-controller';
+import { createBook, deleteBook, editBook, getBooks } from '../../controllers/book-controller';
+
+function reload() {
+  location.reload();
+}
 
 export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string }) {
   const { value: data, loading, error } = useAsync(getBooks, 0);
   const [selectedCells, { set, push }] = useList([]);
   const { setTrue: openDialog, setFalse: closeDialog, value: isDialogOpen } = useBoolean(false);
   const [isEditMode, setIsEditMode] = React.useState(false);
+  const [editingBookId, setEditingBookId] = React.useState(null);
 
   const [name, setName] = React.useState('');
   const [author, setAuthor] = React.useState('');
@@ -54,23 +59,30 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
   };
 
   function loanSelectedBooks() {
-    loanBooks({ customerLogin: login, bookIds: selectedCells });
+    loanBooks({ customerLogin: login, bookIds: selectedCells }).then(reload);
   }
 
   const handleReturnBook = id => () => {
-    returnBook({ bookId: id, returnCondition: 'GOOD' });
+    returnBook({ bookId: id, returnCondition: 'GOOD' }).then(reload);
   };
 
   function handleSubmit() {
     if (isEditMode) {
-      console.log(name, author, ISBN);
+      editBook({ name, author, isbn: ISBN }, editingBookId).then(reload);
     } else {
-      console.log(name, author, ISBN);
+      createBook({ name, author, isbn: ISBN }).then(reload);
     }
   }
 
+  const handleDelete = id => () => {
+    deleteBook(id)
+      .then(reload)
+      .catch(reload);
+  };
+
   const makeCreateMode = () => {
     openDialog();
+    setEditingBookId(null);
     setNameTouched(false);
     setAuthorTouched(false);
     setISBNTouched(false);
@@ -82,13 +94,12 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
 
   const makeEditMode = entity => () => {
     openDialog();
+    setEditingBookId(entity.id);
     setIsEditMode(true);
     setName(entity.name);
     setAuthor(entity.author);
     setISBN(entity.isbn);
   };
-
-  console.log(data);
 
   return (
     <>
@@ -135,7 +146,7 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
                           {entity.customer ? `${entity.customer.name} ${entity.customer.surname}` : '-'}
                         </TableCell>
                       )}
-                      {isAdmin && <ActionCell onDelete={console.log} onUpdate={makeEditMode(entity)} />}
+                      {isAdmin && <ActionCell onDelete={handleDelete(entity.id)} onUpdate={makeEditMode(entity)} />}
                     </TableRow>
                   ))}
               </TableBody>

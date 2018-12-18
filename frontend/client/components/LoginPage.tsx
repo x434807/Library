@@ -1,7 +1,9 @@
 // Author: Matúš Čongrády
 
 import { Card, FormHelperText, TextField } from '@material-ui/core';
+import { ErrorMessage } from '@reusable/ErrorMessage';
 import * as React from 'react';
+import { checkCredentials } from '../controllers/customer-controller';
 
 interface LoginPageProps {
   setSessionstorageLogin(login: string): void;
@@ -20,18 +22,29 @@ export function LoginPage({
   const [password, setPassword] = React.useState('');
   const [isLoginTouched, setIsLoginTouched] = React.useState(false);
   const [isPasswordTouched, setIsPasswordTouched] = React.useState(false);
+  const [error, setError] = React.useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
-    setSessionstorageLogin(login);
-    setSessionstoragePassword(password);
-    setIsAdmin(true);
-    setIsLoggedIn(true);
+    checkCredentials(login, password)
+      .then(res => {
+        if (res.successfull !== 'yes') {
+          setError(true);
+        } else {
+          const isAdmin = res.admin === 'yes';
+          setSessionstorageLogin(login);
+          setSessionstoragePassword(password);
+          setIsAdmin(res.admin === 'yes');
+          setIsLoggedIn(isAdmin);
 
-    const isAdmin = false;
-    if (!isAdmin) {
-      window.location.hash = 'books';
-    }
+          if (!isAdmin) {
+            window.location.hash = 'books';
+          }
+        }
+      })
+      .catch(() => {
+        setError(true);
+      });
   }
 
   const isLoginError = isLoginTouched && !login;
@@ -48,6 +61,7 @@ export function LoginPage({
       }}
     >
       <Card style={{ padding: '30px', width: '350px' }}>
+        {error && <ErrorMessage message="Wrong login or password" />}
         <form autoComplete="off" onSubmit={handleSubmit}>
           <div>
             <TextField
@@ -58,6 +72,7 @@ export function LoginPage({
               onChange={e => {
                 setLogin(e.target.value);
                 setIsLoginTouched(true);
+                setError(false);
               }}
               margin="normal"
             />
@@ -74,6 +89,7 @@ export function LoginPage({
               onChange={e => {
                 setPassword(e.target.value);
                 setIsPasswordTouched(true);
+                setError(false);
               }}
               margin="normal"
             />

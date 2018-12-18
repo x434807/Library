@@ -14,8 +14,6 @@ import { getCustomers } from '../../controllers/customer-controller';
 export function CustomersTable() {
   const { value: data, loading, error } = useAsync(getCustomers, 0);
 
-  console.log(data);
-
   return (
     <>
       {loading && <LinearProgress />}
