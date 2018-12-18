@@ -44,7 +44,7 @@ const config = {
   },
   stats: 'errors-only',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../rest/src/main/webapp'),
     filename: isDev ? 'app.bundle.js' : 'app.bundle.[hash].js',
     publicPath: '/'
   },
