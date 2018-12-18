@@ -11,5 +11,12 @@ export const checkCredentials = (login, password) => {
   return request(`${REST_API_URL}/customers/login`, {
     method: 'POST',
     body: JSON.stringify({ login, password })
-  });
+  })
+    .then(res => {
+      if (res.successfull !== 'yes') throw new Error('Error');
+      return res;
+    })
+    .catch(res => {
+      return res;
+    });
 };

@@ -28,19 +28,13 @@ export function LoginPage({
     e.preventDefault();
     checkCredentials(login, password)
       .then(res => {
-        if (res.successfull !== 'yes') {
-          setError(true);
-        } else {
-          const isAdmin = res.admin === 'yes';
-          setSessionstorageLogin(login);
-          setSessionstoragePassword(password);
-          setIsAdmin(res.admin === 'yes');
-          setIsLoggedIn(isAdmin);
+        const isAdmin = res.admin === 'yes';
+        setSessionstorageLogin(login);
+        setSessionstoragePassword(password);
+        setIsAdmin(isAdmin);
+        setIsLoggedIn(true);
 
-          if (!isAdmin) {
-            window.location.hash = 'books';
-          }
-        }
+        window.location.hash = 'books';
       })
       .catch(() => {
         setError(true);
@@ -61,6 +55,8 @@ export function LoginPage({
       }}
     >
       <Card style={{ padding: '30px', width: '350px' }}>
+        <p>Admin - login: test123, pw: hunter2</p>
+        <p>Customer - login: repairman, pw: logmein</p>
         {error && <ErrorMessage message="Wrong login or password" />}
         <form autoComplete="off" onSubmit={handleSubmit}>
           <div>

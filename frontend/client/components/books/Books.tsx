@@ -116,12 +116,12 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
                 <TableRow>
                   {!isAdmin && <TableCell />}
                   <TableCell>Name</TableCell>
-                  <TableCell numeric>Author</TableCell>
-                  <TableCell numeric>ISBN</TableCell>
-                  <TableCell numeric>Condition</TableCell>
-                  {isAdmin && <TableCell numeric>Available</TableCell>}
-                  {isAdmin && <TableCell numeric>Borrowed by</TableCell>}
-                  {isAdmin && <TableCell numeric>Actions</TableCell>}
+                  <TableCell>Author</TableCell>
+                  <TableCell>ISBN</TableCell>
+                  <TableCell>Condition</TableCell>
+                  {isAdmin && <TableCell>Available</TableCell>}
+                  {isAdmin && <TableCell>Borrowed by</TableCell>}
+                  {isAdmin && <TableCell>Actions</TableCell>}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -137,12 +137,12 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
                       <TableCell padding="dense" component="th" scope="row">
                         {entity.name}
                       </TableCell>
-                      <TableCell numeric>{entity.author}</TableCell>
-                      <TableCell numeric>{entity.isbn}</TableCell>
-                      <TableCell numeric>{entity.condition}</TableCell>
-                      {isAdmin && <TableCell numeric>{String(entity.available)}</TableCell>}
+                      <TableCell>{entity.author}</TableCell>
+                      <TableCell>{entity.isbn}</TableCell>
+                      <TableCell>{entity.condition}</TableCell>
+                      {isAdmin && <TableCell>{String(entity.available)}</TableCell>}
                       {isAdmin && (
-                        <TableCell numeric>
+                        <TableCell>
                           {entity.customer ? `${entity.customer.name} ${entity.customer.surname}` : '-'}
                         </TableCell>
                       )}
@@ -185,6 +185,11 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
               <FormControl style={{ marginTop: '6px' }} fullWidth>
                 <div>
                   <TextField
+                    inputProps={{
+                      autocomplete: 'off',
+                      autocorrect: 'off',
+                      spellcheck: 'false'
+                    }}
                     autoFocus
                     value={name}
                     margin="dense"
@@ -203,6 +208,11 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
                 </div>
                 <div>
                   <TextField
+                    inputProps={{
+                      autocomplete: 'off',
+                      autocorrect: 'off',
+                      spellcheck: 'false'
+                    }}
                     value={author}
                     type="string"
                     margin="dense"
@@ -220,6 +230,11 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
                 </div>
                 <div>
                   <TextField
+                    inputProps={{
+                      autocomplete: 'off',
+                      autocorrect: 'off',
+                      spellcheck: 'false'
+                    }}
                     value={ISBN}
                     type="string"
                     margin="dense"
@@ -256,13 +271,12 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
                 <Table padding="dense">
                   <TableHead>
                     <TableRow>
-                      {!isAdmin && <TableCell />}
                       <TableCell>Name</TableCell>
-                      <TableCell numeric>Author</TableCell>
-                      <TableCell numeric>ISBN</TableCell>
-                      <TableCell numeric>Condition</TableCell>
-                      <TableCell numeric>Borrowed by</TableCell>
-                      {isAdmin && <TableCell numeric>Actions</TableCell>}
+                      <TableCell>Author</TableCell>
+                      <TableCell>ISBN</TableCell>
+                      <TableCell>Condition</TableCell>
+                      {!isAdmin && <TableCell />}
+                      {isAdmin && <TableCell>Actions</TableCell>}
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -274,12 +288,9 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
                           <TableCell padding="dense" component="th" scope="row">
                             {entity.name}
                           </TableCell>
-                          <TableCell numeric>{entity.author}</TableCell>
-                          <TableCell numeric>{entity.isbn}</TableCell>
-                          <TableCell numeric>{entity.condition}</TableCell>
-                          <TableCell numeric>
-                            {entity.customer ? `${entity.customer.name} ${entity.customer.surname}` : '-'}
-                          </TableCell>
+                          <TableCell>{entity.author}</TableCell>
+                          <TableCell>{entity.isbn}</TableCell>
+                          <TableCell>{entity.condition}</TableCell>
                           <Button
                             color="primary"
                             onClick={handleReturnBook(entity.id)}

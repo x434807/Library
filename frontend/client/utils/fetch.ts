@@ -16,6 +16,6 @@ export const request = (requestInfo: RequestInfo, init?: RequestInit) => {
     .then(res => res.json())
     .catch(err => {
       console.error(err);
-      throw err;
+      return err;
     });
 };
