@@ -46,7 +46,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, '../rest/src/main/webapp'),
     filename: isDev ? 'app.bundle.js' : 'app.bundle.[hash].js',
-    publicPath: '/pa165/'
+    publicPath: isDev ? '' : '/pa165/'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
