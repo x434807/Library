@@ -1,13 +1,19 @@
 package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.service;
 
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.CustomerDAO;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
-import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.List;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import javax.inject.Inject;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.dao.CustomerDAO;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Customer;
+import cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.entity.Loan;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,26 +23,27 @@ import javax.inject.Inject;
 
 /**
  *
- * @author Andrej Sokolík
+ * @author Matus Congrady, Andrej Sokolík
  */
 
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
     @Inject
     private CustomerDAO customerDao;
-    
+
     @Override
     public void registerCustomer(Customer customer) throws DataAccessException, IllegalArgumentException {
-        if(customer == null){
+        if (customer == null) {
             throw new IllegalArgumentException("Customer cannot be null!");
         }
+        customer.setPassword(createHash(customer.getPassword()));
         customerDao.create(customer);
     }
 
     @Override
     public void removeCustomer(Customer customer) throws DataAccessException, IllegalArgumentException {
-        if(customer == null){
+        if (customer == null) {
             throw new IllegalArgumentException("Customer cannot be null!");
         }
         customerDao.remove(customer);
@@ -44,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public void updateCustomer(Customer customer) throws DataAccessException, IllegalArgumentException {
-        if(customer == null){
+        if (customer == null) {
             throw new IllegalArgumentException("Customer cannot be null!");
         }
         customerDao.update(customer);
@@ -58,14 +65,12 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public boolean authenticate(String login, String password) throws DataAccessException, IllegalArgumentException {
         Customer customer = findCustomerByLogin(login);
-        return (customer.getPassword() == null ? password == null : customer.getPassword().equals(password));
+        return customer != null && validatePassword(password, customer.getPassword());
     }
-
-    
 
     @Override
     public Customer findCustomerById(Long id) throws DataAccessException, IllegalArgumentException {
-        if(id == null){
+        if (id == null) {
             throw new IllegalArgumentException("ID cannot be null!");
         }
         return customerDao.findById(id);
@@ -78,7 +83,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Customer findCustomerByLogin(String login) throws DataAccessException, IllegalArgumentException {
-        if(login.equals(null)){
+        if (login.equals(null)) {
             throw new IllegalArgumentException("Empty login is not allowed!");
         }
         return customerDao.findByLogin(login);
@@ -86,10 +91,82 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public List<Loan> findCustomersLoans(Customer customer) throws DataAccessException, IllegalArgumentException {
-        if(customer == null){
+        if (customer == null) {
             throw new IllegalArgumentException("Customer cannot be null!");
         }
         return customer.getLoans();
     }
-    
+
+    private static String createHash(String password) {
+        final int SALT_BYTE_SIZE = 24;
+        final int HASH_BYTE_SIZE = 24;
+        final int PBKDF2_ITERATIONS = 1000;
+
+        // Generate a random salt:
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[SALT_BYTE_SIZE];
+        random.nextBytes(salt);
+
+        // Hash the password:
+        byte[] hash = pbkdf2(password.toCharArray(), salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
+
+        // Format "iterations:salt:hash":
+        return PBKDF2_ITERATIONS + ":" + toHex(salt) + ":" + toHex(hash);
+    }
+
+    private static byte[] pbkdf2(char[] password, byte[] salt, int iterations, int bytes) {
+        try {
+            PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, bytes * 8);
+            return SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).getEncoded();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean validatePassword(String password, String correctHash) {
+        if (password == null) {
+            return false;
+        }
+        if (correctHash == null) {
+            throw new IllegalArgumentException("The password hash is null!");
+        }
+        String[] params = correctHash.split(":");
+        int iterations = Integer.parseInt(params[0]);
+        byte[] salt = fromHex(params[1]);
+        byte[] hash = fromHex(params[2]);
+        byte[] testHash = pbkdf2(password.toCharArray(), salt, iterations, hash.length);
+        return slowEquals(hash, testHash);
+    }
+
+    private static byte[] fromHex(String hex) {
+        byte[] binary = new byte[hex.length() / 2];
+        for (int i = 0; i < binary.length; i++) {
+            binary[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
+        }
+        return binary;
+    }
+
+    private static String toHex(byte[] array) {
+        BigInteger bi = new BigInteger(1, array);
+        String hex = bi.toString(16);
+        int paddingLength = (array.length * 2) - hex.length();
+        return paddingLength > 0 ? String.format("%0" + paddingLength + "d", 0) + hex : hex;
+    }
+
+    /**
+     * Compares two byte arrays in length-constant time. This comparison method is
+     * used so that password hashes cannot be extracted from an on-line system using
+     * a timing attack and then attacked off-line.
+     *
+     * @param a the first byte array
+     * @param b the second byte array
+     * @return true if both byte arrays are the same, false otherwise
+     */
+    private static boolean slowEquals(byte[] a, byte[] b) {
+        int diff = a.length ^ b.length;
+        for (int i = 0; i < a.length && i < b.length; i++) {
+            diff |= a[i] ^ b[i];
+        }
+        return diff == 0;
+    }
 }
