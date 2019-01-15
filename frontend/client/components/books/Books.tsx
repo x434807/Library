@@ -12,6 +12,8 @@ import {
   FormControl,
   FormHelperText,
   LinearProgress,
+  MenuItem,
+  Select,
   TextField,
   Typography
 } from '@material-ui/core';
@@ -25,15 +27,10 @@ import { ActionCell } from '@reusable/ActionCell';
 import { ErrorMessage } from '@reusable/ErrorMessage';
 import * as React from 'react';
 import { useBoolean } from 'react-hanger';
-import { useAsync, useList } from 'react-use';
+import { useList } from 'react-use';
 import { createBook, deleteBook, editBook, getBooks } from '../../controllers/book-controller';
 
-function reload() {
-  location.reload();
-}
-
 export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string }) {
-  const { value: data, loading, error } = useAsync(getBooks, 0);
   const [selectedCells, { set, push }] = useList([]);
   const { setTrue: openDialog, setFalse: closeDialog, value: isDialogOpen } = useBoolean(false);
   const [isEditMode, setIsEditMode] = React.useState(false);
@@ -45,11 +42,35 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
   const [isNameTouched, setNameTouched] = React.useState(false);
   const [isAuthorTouched, setAuthorTouched] = React.useState(false);
   const [isISBNTouched, setISBNTouched] = React.useState(false);
+  const [bookStates, setBookState] = React.useState([]);
+  const [data, setData] = React.useState(null);
+  const [loading, setIsLoading] = React.useState(false);
+  const [error, setIsError] = React.useState('');
 
+  const fetchData = () => {
+    setIsError('');
+    setIsLoading(true);
+    getBooks()
+      .then(res => {
+        setData(res);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setIsError(err);
+      });
+  };
+
+  React.useEffect(
+    () => {
+      fetchData();
+    },
+    [0]
+  );
   const isNameError = isNameTouched && !name;
   const isAuthorError = isAuthorTouched && !author;
   const isISBNError = isISBNTouched && !ISBN;
 
+  if (data && !bookStates.length) setBookState(data.map(book => ({ id: book.id, condition: book.condition })));
   const selectCell = id => () => {
     if (selectedCells.includes(id)) {
       set(selectedCells.filter(cell => cell !== id));
@@ -58,30 +79,40 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
     }
   };
 
+  const refetch = () => {
+    closeDialog();
+    resetFields();
+    fetchData();
+  };
+
   function loanSelectedBooks() {
-    loanBooks({ customerLogin: login, bookIds: selectedCells }).then(reload);
+    loanBooks({ customerLogin: login, bookIds: selectedCells }).then(refetch);
   }
 
+  const handleChangeBookState = id => e => {
+    const bookToAdjust = bookStates.find(book => book.id === id);
+    setBookState([{ ...bookToAdjust, condition: e.target.value }, ...bookStates.filter(book => book.id !== id)]);
+  };
+
   const handleReturnBook = id => () => {
-    returnBook({ bookId: id, returnCondition: 'GOOD' }).then(reload);
+    returnBook({ bookId: id, returnCondition: bookStates.find(book => book.id === id).condition }).then(refetch);
   };
 
   function handleSubmit() {
     if (isEditMode) {
-      editBook({ name, author, isbn: ISBN }, editingBookId).then(reload);
+      editBook({ name, author, isbn: ISBN }, editingBookId).then(refetch);
     } else {
-      createBook({ name, author, isbn: ISBN }).then(reload);
+      createBook({ name, author, isbn: ISBN }).then(refetch);
     }
   }
 
   const handleDelete = id => () => {
     deleteBook(id)
-      .then(reload)
-      .catch(reload);
+      .then(refetch)
+      .catch(refetch);
   };
 
-  const makeCreateMode = () => {
-    openDialog();
+  const resetFields = () => {
     setEditingBookId(null);
     setNameTouched(false);
     setAuthorTouched(false);
@@ -90,6 +121,11 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
     setName('');
     setAuthor('');
     setISBN('');
+  };
+
+  const makeCreateMode = () => {
+    openDialog();
+    resetFields();
   };
 
   const makeEditMode = entity => () => {
@@ -105,7 +141,7 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
     <>
       {loading && <LinearProgress />}
       {error && <ErrorMessage message="Error" />}
-      {data && (
+      {data && bookStates.length && (
         <>
           <Paper>
             <Typography variant="h6" color="inherit" noWrap style={{ paddingLeft: '18px', paddingTop: '12px' }}>
@@ -275,6 +311,7 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
                       <TableCell>Author</TableCell>
                       <TableCell>ISBN</TableCell>
                       <TableCell>Condition</TableCell>
+                      {!isAdmin && <TableCell>Return condition</TableCell>}
                       {!isAdmin && <TableCell />}
                       {isAdmin && <TableCell>Actions</TableCell>}
                     </TableRow>
@@ -291,6 +328,16 @@ export function BooksTable({ isAdmin, login }: { isAdmin: boolean; login: string
                           <TableCell>{entity.author}</TableCell>
                           <TableCell>{entity.isbn}</TableCell>
                           <TableCell>{entity.condition}</TableCell>
+                          <TableCell>
+                            <Select
+                              value={bookStates.find(b => b.id === entity.id).condition}
+                              onChange={handleChangeBookState(entity.id)}
+                            >
+                              <MenuItem value={'NEW'}>NEW</MenuItem>
+                              <MenuItem value={'GOOD'}>GOOD</MenuItem>
+                              <MenuItem value={'BAD'}>BAD</MenuItem>
+                            </Select>
+                          </TableCell>
                           <Button
                             color="primary"
                             onClick={handleReturnBook(entity.id)}

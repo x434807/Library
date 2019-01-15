@@ -26,7 +26,7 @@
     "react-dom": "^16.7.0-alpha.2",
     "react-hanger": "^1.0.8",
     "react-hot-loader": "^4.6.0",
-    "react-use": "^4.11.1",
+    "react-use": "^5.2.1",
     "validator": "^10.9.0"
   },
   "devDependencies": {

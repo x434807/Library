@@ -3686,6 +3686,11 @@ jss@^9.3.3:
     symbol-observable "^1.1.0"
     warning "^3.0.0"
 
+keyboardjs@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/keyboardjs/-/keyboardjs-2.5.1.tgz#2eb5d96bd1028e07136cd71919f607579edca716"
+  integrity sha512-mRf7MQMiFcudADEpPn3vTtl/rtFELo5MAiKA6yH4ShsFsnwwjMrVfaNt6bpYhBDeODs/T5NXwltz4+ktRQyP7A==
+
 keycode@^2.1.9:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
@@ -4894,12 +4899,13 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-use@^4.11.1:
-  version "4.11.1"
-  resolved "https://registry.yarnpkg.com/react-use/-/react-use-4.11.1.tgz#04215857e81fd1ce46b5ac121ea85f0ed612f811"
-  integrity sha512-4PZun33dUI/lKZgsR1hdB1hE58AFRcH6nfnaisfNHb+WtbdedjN4gFhHoXX7vcgsZxd3NxR0QqVUBCJhwejf0Q==
+react-use@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/react-use/-/react-use-5.2.1.tgz#a1e12472789c19930f37eacb0371c89d192c54a3"
+  integrity sha512-E1l64CUjm1gnxqJvL7Lvnnc9ykoN4CvQIzuIuSrI9gM4jubugxAzJhv1OzONTs74pM9WtczIyYbXvipWKJxi1w==
   dependencies:
     "@types/react" "^16.7.13"
+    keyboardjs "^2.5.1"
     nano-css "^3.4.0"
     react-wait "^0.3.0"
     rebound "^0.1.0"

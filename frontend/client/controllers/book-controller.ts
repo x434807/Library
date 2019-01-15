@@ -22,5 +22,5 @@ export const editBook = (bookData: BookData, id: string) => {
 };
 
 export const deleteBook = (id: string) => {
-  return request(`${REST_API_URL}/books/${id}`, { method: 'DELETE' });
+  return request(`${REST_API_URL}/books/discard/${id}`, { method: 'DELETE' });
 };
