@@ -50,6 +50,6 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public List<Book> findAll() {
-        return em.createQuery("SELECT b FROM Book b", Book.class).getResultList();
+        return em.createQuery("SELECT b FROM Book b WHERE b.condition is not cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums.BookCondition.DISCARDED", Book.class).getResultList();
     }
 }

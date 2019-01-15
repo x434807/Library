@@ -33,6 +33,13 @@ public interface BookFacade {
      */
     void removeBook(BookDTO book);
 
+
+    /**
+     * Discards the given book by its ID.
+     *
+     * @param id of the book to be discarded
+     */
+    void discardBook(BookDTO bookDTO);
     /**
      * Updates the given book.
      *

@@ -77,19 +77,19 @@ public class BooksController {
 
     /**
      *
-     * remove book by id
+     * discard book by id
      *
      * @param id book identifier
      * @return BookDTO
      * @throws ResourceNotFoundException
      */
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final Map<String, String> deleteBook(@PathVariable("id") long id) throws Exception {
+    @RequestMapping(value = "/discard/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final Map<String, String> discardBook(@PathVariable("id") long id) throws Exception {
         logger.debug("rest getBook({})", id);
 
         try {
             BookDTO bookDTO = bookFacade.findBookById(id);
-            bookFacade.removeBook(bookDTO);
+            bookFacade.discardBook(bookDTO);
             return Collections.singletonMap("status", "ok");
         } catch (Exception ex) {
             throw new ResourceNotFoundException();

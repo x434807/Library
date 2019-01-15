@@ -86,6 +86,15 @@ public class BookFacadeImpl implements BookFacade {
     }
 
     @Override
+    public void discardBook(BookDTO bookDTO) {
+        Book book = bookService.findBookById(bookDTO.getId());
+
+        book.setCondition(BookCondition.DISCARDED);
+
+        bookService.updateBook(book);
+    }
+
+    @Override
     public BookDTO findBookById(Long id) {
         logger.debug("Getting a book with with id {}", id);
         return beanMappingService.mapTo(bookService.findBookById(id), BookDTO.class);

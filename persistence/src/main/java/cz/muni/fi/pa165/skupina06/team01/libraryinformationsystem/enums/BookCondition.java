@@ -5,5 +5,5 @@ package cz.muni.fi.pa165.skupina06.team01.libraryinformationsystem.enums;
  */
 
 public enum BookCondition {
-    UNKNOWN, NEW, GOOD, BAD
+    UNKNOWN, NEW, GOOD, BAD, DISCARDED
 }
