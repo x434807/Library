@@ -1,6 +1,6 @@
 // Author: Matúš Čongrády
 
-import { Card, FormHelperText, TextField } from '@material-ui/core';
+import { Button, Card, FormHelperText, TextField } from '@material-ui/core';
 import { ErrorMessage } from '@reusable/ErrorMessage';
 import * as React from 'react';
 import { checkCredentials } from '../controllers/customer-controller';
@@ -28,6 +28,7 @@ export function LoginPage({
     e.preventDefault();
     checkCredentials(login, password)
       .then(res => {
+        if (res.status === 'not ok') throw new Error('Wrong credentials');
         const isAdmin = res.admin === 'yes';
         setSessionstorageLogin(login);
         setSessionstoragePassword(password);
@@ -89,7 +90,16 @@ export function LoginPage({
               }}
               margin="normal"
             />
-            <button disabled={!password || !login} type="submit" hidden />
+            <Button
+              disabled={!password || !login}
+              type="submit"
+              fullWidth
+              style={{ float: 'right', marginBottom: '50px', top: '15px' }}
+              variant="contained"
+              color="primary"
+            >
+              Submit
+            </Button>
             {isPasswordError && <FormHelperText>Password can not be empty</FormHelperText>}
           </div>
         </form>
